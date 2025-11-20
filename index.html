@@ -63,7 +63,6 @@
 
     .role-toggle button.active {
       background-color: #1b2d83;
-      /* Blue active button */
       color: #fff;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
@@ -74,14 +73,12 @@
       margin-bottom: 18px;
     }
 
-    .input-box input,
-    .input-box select {
+    .input-box input {
       width: 100%;
       padding: 12px 15px 12px 40px;
       border: none;
       border-radius: 10px;
       background-color: #f2f2f2;
-      /* Light grey box */
       font-size: 14px;
       color: #333;
       outline: none;
@@ -95,8 +92,68 @@
       transform: translateY(-50%);
       color: #555;
       font-size: 16px;
-      background-position: right 5px center;
+    }
 
+    /* ---------- CUSTOM DROPDOWN ---------- */
+
+    .custom-select {
+      width: 84%;
+      background: #f2f2f2;
+      padding: 12px 15px 12px 40px;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .custom-select::after {
+      content: "▼";
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      pointer-events: none;
+    }
+
+    .custom-select .selected {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .custom-select .options {
+      position: absolute;
+      top: 120%;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-radius: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      display: none;
+      z-index: 10;
+    }
+
+    .custom-select .options li {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Hover color (your color) */
+    .custom-select .options li:hover {
+      background-color: #1b2d83;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .custom-select .options li:last-child {
+      border-bottom: none;
     }
 
     /* Login button */
@@ -118,11 +175,11 @@
     }
 
     
-
   </style>
 </head>
 
 <body>
+
   <div class="container">
     <img src="logo.png" alt="logo" height="50%" width="50%">
     <h2>Login</h2>
@@ -145,16 +202,20 @@
       <input type="password" id="password" placeholder="Password">
     </div>
 
-    <!-- Role -->
-    <div class="input-box" id="roleSelectBox">
-      <i>⚙</i>
-      <select id="role">
-        <option value="Faculty">Faculty</option>
-        <option value="Program VAC">Program VAC</option>
-        <option value="Program Coordinator">Program Coordinator</option>
-        <option value="Component Coordinator">Component Coordinator</option>
-        <option value="Timetable Coordinator">Timetable Coordinator</option>
-      </select>
+    <!-- Custom Dropdown -->
+    <div class="input-box" id="roleBox">
+        
+      <div class="custom-select" id="customSelect">
+        <i>⚙</i>
+        <div class="selected" style="text-align:left;">Role</div>
+        <ul class="options" style="text-align:left;">
+          <li data-value="Faculty"style="text-align:left;">Faculty</li>
+          <li data-value="Program VAC"style="text-align:left;">Program VAC</li>
+          <li data-value="Program Coordinator"style="text-align:left;">Program Coordinator</li>
+          <li data-value="Component Coordinator"style="text-align:left;">Component Coordinator</li>
+          <li data-value="Timetable Coordinator"style="text-align:left;">Timetable Coordinator</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Login Button -->
@@ -164,34 +225,54 @@
   <script>
     const adminBtn = document.getElementById('adminBtn');
     const facultyBtn = document.getElementById('facultyBtn');
-    const roleSelect = document.getElementById('role');
-    const roleSelectBox = document.getElementById('roleSelectBox');
+    const roleBox = document.getElementById('roleBox');
 
-    // Initially hide the role select box
-    roleSelectBox.style.display = 'none';
+    // Hide role box for admin
+    roleBox.style.display = 'none';
 
-    // Toggle between Admin and Faculty buttons
     adminBtn.addEventListener('click', () => {
       adminBtn.classList.add('active');
       facultyBtn.classList.remove('active');
-      roleSelect.value = 'Admin';
-      roleSelectBox.style.display = 'none'; // Hide for Admin
+      roleBox.style.display = 'none';
     });
 
     facultyBtn.addEventListener('click', () => {
       facultyBtn.classList.add('active');
       adminBtn.classList.remove('active');
-      roleSelect.value = 'Faculty';
-      roleSelectBox.style.display = 'block'; // Show for Faculty
+      roleBox.style.display = 'block';
     });
 
-    // Login function
+    // Custom Select JS
+    const customSelect = document.getElementById("customSelect");
+    const selected = customSelect.querySelector(".selected");
+    const optionList = customSelect.querySelector(".options");
+    const options = optionList.querySelectorAll("li");
+
+    selected.addEventListener("click", () => {
+      optionList.style.display =
+        optionList.style.display === "block" ? "none" : "block";
+    });
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        selected.textContent = option.textContent;
+        selected.setAttribute("data-value", option.dataset.value);
+        optionList.style.display = "none";
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!customSelect.contains(e.target)) {
+        optionList.style.display = "none";
+      }
+    });
+
     function login() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
-      const role = roleSelect.value;
+      const role = selected.textContent;
 
-      if (!username || !password || !role) {
+      if (!username || !password) {
         alert("Please fill all the fields!");
         return;
       }
@@ -199,6 +280,7 @@
       alert('Login successful as ${role}');
     }
   </script>
+
 </body>
 
 </html>

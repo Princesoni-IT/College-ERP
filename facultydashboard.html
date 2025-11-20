@@ -9,23 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #103b77 0%, #1a4a9b 100%);
-            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
         /* Sidebar */
         .sidebar {
             width: 250px;
             height: 100vh;
-            background: rgba(16, 59, 119, 0.95);
+            background: #103b77;
             color: white;
             position: fixed;
             left: 0;
@@ -33,16 +26,13 @@
             transition: 0.4s;
             overflow-y: auto;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar h2 {
             padding: 15px 20px;
             font-size: 20px;
             margin: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
 
         .sidebar ul {
@@ -57,18 +47,14 @@
             align-items: center;
             cursor: pointer;
             transition: 0.3s;
-            color: rgba(255, 255, 255, 0.9);
         }
 
         .sidebar ul li i {
             margin-right: 12px;
-            color: #ffd700;
         }
 
         .sidebar ul li:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding-left: 25px;
+            background: rgba(255,255,255,0.2);
         }
 
         /* Content Section */
@@ -80,26 +66,18 @@
         /* Top Navigation */
         .topbar {
             height: 70px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: white;
+            border-bottom: 1px solid #ddd;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
             flex-wrap: wrap;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .menu-btn {
             font-size: 22px;
             cursor: pointer;
-            color: white;
-            transition: 0.3s;
-        }
-
-        .menu-btn:hover {
-            color: #ffd700;
         }
 
         .logo-container {
@@ -121,15 +99,13 @@
 
         .heading-title {
             font-size: 18px;
-            font-weight: 600;
-            color: white;
+            font-weight: bold;
         }
 
         .college-year {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: bold;
             margin-left: 15px;
-            color: #ffd700;
         }
 
         .top-right {
@@ -142,25 +118,16 @@
             font-size: 20px;
             cursor: pointer;
             transition: 0.3s;
-            color: white;
         }
 
         .top-right i:hover {
-            color: #ffd700;
+            color: #103b77;
         }
 
         .profile-area {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 15px;
-            border-radius: 25px;
-            transition: 0.3s;
-        }
-
-        .profile-area:hover {
-            background: rgba(255, 255, 255, 0.25);
         }
 
         .profile-img {
@@ -168,13 +135,12 @@
             height: 33px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ffd700;
+            border: 1px solid #ccc;
         }
 
         .profile-text {
             font-size: 14px;
-            color: white;
-            font-weight: 500;
+            color: gray;
         }
 
         /* Sidebar collapsed */
@@ -190,80 +156,80 @@
             margin-left: 60px;
         }
 
-        /* ----------- RESPONSIVE ADJUSTMENTS ----------- */
+       /* ----------- RESPONSIVE ADJUSTMENTS ----------- */
 
-        @media (max-width: 900px) {
-            .logo-text {
-                flex-direction: column;
-                gap: 5px;
-                text-align: center;
-            }
+@media (max-width: 900px) {
+    .logo-text {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
 
-            .heading-title {
-                font-size: 15px;
-            }
+    .heading-title {
+        font-size: 15px;
+    }
 
-            .college-year {
-                font-size: 14px;
-                margin-left: 0;
-            }
-        }
+    .college-year {
+        font-size: 14px;
+        margin-left: 0;
+    }
+}
 
-        @media (max-width: 768px) {
-            /* Sidebar hidden by default on mobile */
-            .sidebar {
-                left: -250px;
-            }
+@media (max-width: 768px) {
+    /* Sidebar hidden by default on mobile */
+    .sidebar {
+        left: -250px;
+    }
 
-            .sidebar.show {
-                left: 0;
-            }
+    .sidebar.show {
+        left: 0;
+    }
 
-            /* Content takes full width */
-            .content {
-                margin-left: 0;
-            }
+    /* Content takes full width */
+    .content {
+        margin-left: 0;
+    }
 
-            /* Adjust top bar layout */
-            .topbar {
-                flex-wrap: wrap;
-                height: auto;
-                padding: 10px;
-                gap: 10px;
-            }
+    /* Adjust top bar layout */
+    .topbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+    }
 
-            .logo-container img {
-                height: 45px;
-            }
+    .logo-container img {
+        height: 45px;
+    }
 
-            .top-right {
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
+    .top-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
 
-        @media (max-width: 480px) {
-            .heading-title {
-                font-size: 13px;
-            }
+@media (max-width: 480px) {
+    .heading-title {
+        font-size: 13px;
+    }
 
-            .college-year {
-                font-size: 12px;
-            }
+    .college-year {
+        font-size: 12px;
+    }
 
-            .logo-container img {
-                height: 35px;
-            }
+    .logo-container img {
+        height: 35px;
+    }
 
-            .profile-text {
-                display: none;
-            }
+    .profile-text {
+        display: none;
+    }
 
-            .profile-img {
-                width: 28px;
-                height: 28px;
-            }
-        }
+    .profile-img {
+        width: 28px;
+        height: 28px;
+    }
+}
 
     </style>
 </head>
