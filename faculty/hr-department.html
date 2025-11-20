@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP Dashboard</title>
+    <title>HR Department - ERP Dashboard</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -60,6 +60,10 @@
 
         .sidebar ul li:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar ul li.active {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Content */
@@ -160,6 +164,23 @@
             margin-left: 60px;
         }
 
+        /* Page Content */
+        .page-content {
+            padding: 20px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            color: #103b77;
+        }
+
         /* ----------- RESPONSIVE ----------- */
         @media (max-width: 900px) {
             .logo-text {
@@ -218,20 +239,20 @@
     <div class="sidebar" id="sidebar">
         <h2>Dashboard</h2>
         <ul>
-            <li><a href="faculty/alumni.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></a></li>
-            <li><a href="faculty/examination.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-file"></i> <span>Examination</span></a></li>
-            <li><a href="faculty/student-section.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-users"></i> <span>Student Section</span></a></li>
-            <li><a href="faculty/hr-department.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></a></li>
-            <li><a href="faculty/accounts.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-book"></i> <span>Accounts</span></a></li>
-            <li><a href="faculty/progressions.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></a></li>
-            <li><a href="faculty/program-coordinator.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-check"></i> <span>Program Coordinator</span></a></li>
-            <li><a href="faculty/academics.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></a></li>
-            <li><a href="faculty/placements.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-building-columns"></i> <span>Placements</span></a></li>
-            <li><a href="faculty/pdic.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></a></li>
-            <li><a href="faculty/audit.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></a></li>
-            <li><a href="faculty/research.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-flask"></i> <span>Research</span></a></li>
-            <li><a href="faculty/extension.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></a></li>
-            <li><a href="faculty/consultancy.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></a></li>
+            <li><a href="alumni.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></a></li>
+            <li><a href="examination.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-file"></i> <span>Examination</span></a></li>
+            <li><a href="student-section.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-users"></i> <span>Student Section</span></a></li>
+            <li class="active"><a href="hr-department.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></a></li>
+            <li><a href="accounts.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-book"></i> <span>Accounts</span></a></li>
+            <li><a href="progressions.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></a></li>
+            <li><a href="program-coordinator.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-check"></i> <span>Program Coordinator</span></a></li>
+            <li><a href="academics.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></a></li>
+            <li><a href="placements.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-building-columns"></i> <span>Placements</span></a></li>
+            <li><a href="pdic.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></a></li>
+            <li><a href="audit.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></a></li>
+            <li><a href="research.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-flask"></i> <span>Research</span></a></li>
+            <li><a href="extension.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></a></li>
+            <li><a href="consultancy.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></a></li>
         </ul>
     </div>
 
@@ -263,10 +284,32 @@
                 </div>
             </div>
         </div>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            <div class="page-header">
+                <h1 class="page-title">HR Department</h1>
+            </div>
+            <p>Welcome to the HR Department section. Here you can manage employee records, payroll, attendance, and other human resource activities.</p>
+            
+            <!-- Add more content specific to HR Department here -->
+        </div>
     </div>
 
-<script src="faculty/dashboard.js"></script>
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
 
+    // Mobile behaviour
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("show");
+        return;
+    }
+
+    // Desktop behaviour
+    sidebar.classList.toggle("collapsed");
+}
+</script>
 
 </body>
 </html>
