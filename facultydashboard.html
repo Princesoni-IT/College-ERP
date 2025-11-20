@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Dashboard</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #103b77 0%, #1a4a9b 100%);
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: rgba(16, 59, 119, 0.95);
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: 0.4s;
+            overflow-y: auto;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar h2 {
+            padding: 15px 20px;
+            font-size: 20px;
+            margin: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 20px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .sidebar ul li i {
+            margin-right: 12px;
+            color: #ffd700;
+        }
+
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding-left: 25px;
+        }
+
+        /* Content Section */
+        .content {
+            margin-left: 250px;
+            transition: 0.4s;
+        }
+
+        /* Top Navigation */
+        .topbar {
+            height: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .menu-btn:hover {
+            color: #ffd700;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 55px;
+            max-width: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .heading-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .college-year {
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 15px;
+            color: #ffd700;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-right i {
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .top-right i:hover {
+            color: #ffd700;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .profile-area:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .profile-img {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd700;
+        }
+
+        .profile-text {
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Sidebar collapsed */
+        .collapsed {
+            width: 60px;
+        }
+
+        .collapsed ul li span {
+            display: none;
+        }
+
+        .collapsed ~ .content {
+            margin-left: 60px;
+        }
+
+        /* ----------- RESPONSIVE ADJUSTMENTS ----------- */
+
+        @media (max-width: 900px) {
+            .logo-text {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            .heading-title {
+                font-size: 15px;
+            }
+
+            .college-year {
+                font-size: 14px;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Sidebar hidden by default on mobile */
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            /* Content takes full width */
+            .content {
+                margin-left: 0;
+            }
+
+            /* Adjust top bar layout */
+            .topbar {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .logo-container img {
+                height: 45px;
+            }
+
+            .top-right {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heading-title {
+                font-size: 13px;
+            }
+
+            .college-year {
+                font-size: 12px;
+            }
+
+            .logo-container img {
+                height: 35px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .profile-img {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2><i class="fas fa-bars"></i> ERP</h2>
+        <ul>
+            <li><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></li>
+            <li><i class="fa-solid fa-file"></i> <span>Examination</span></li>
+            <li><i class="fa-solid fa-users"></i> <span>Student Section</span></li>
+            <li><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></li>
+            <li><i class="fa-solid fa-book"></i> <span>Accounts</span></li>
+            <li><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></li>
+            <li><i class="fa-solid fa-user-check"></i> <span>Program Coordinator</span></li>
+            <li><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></li>
+            <li><i class="fa-solid fa-building-columns"></i> <span>Placements</span></li>
+            <li><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></li>
+            <li><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></li>
+            <li><i class="fa-solid fa-flask"></i> <span>Research</span></li>
+            <li><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></li>
+            <li><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></li>
+        </ul>
+    </div>
+
+    
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Top Navbar -->
+        <div class="topbar">
+            <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+
+                <div class="logo-text">
+                    <div class="heading-title">Prestige Institute of Management and Research</div>
+                    <div class="college-year">2025-2026</div>
+                </div>
+            </div>
+
+            <div class="top-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-circle-question"></i>
+                <i class="fa-solid fa-bell"></i>
+
+                <div class="profile-area">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img" alt="Profile">
+                    <span class="profile-text">Hello! Faculty</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("show");
+    } else {
+        sidebar.classList.toggle("collapsed");
+    }
+}
+
+</script>
+
+</body>
+</html>
