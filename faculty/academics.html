@@ -12,16 +12,6 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
         }
 
         /* Sidebar */
@@ -174,10 +164,6 @@
             margin-left: 60px;
         }
 
-        .content.collapsed {
-            margin-left: 60px;
-        }
-
         /* Page Content */
         .page-content {
             padding: 20px;
@@ -253,20 +239,20 @@
     <div class="sidebar" id="sidebar">
         <h2>Dashboard</h2>
         <ul>
-            <li><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></li>
-            <li><i class="fa-solid fa-file"></i> <span>Examination</span></li>
-            <li><i class="fa-solid fa-users"></i> <span>Student Section</span></li>
-            <li><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></li>
-            <li><i class="fa-solid fa-book"></i> <span>Accounts</span></li>
-            <li><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></li>
-            <li><i class="fa-solid fa-user-check"></i> <span>Program Coordinator</span></li>
-            <li class="active"><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></li>
-            <li><i class="fa-solid fa-building-columns"></i> <span>Placements</span></li>
-            <li><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></li>
-            <li><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></li>
-            <li><i class="fa-solid fa-flask"></i> <span>Research</span></li>
-            <li><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></li>
-            <li><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></li>
+            <li><a href="alumni.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></a></li>
+            <li><a href="examination.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-file"></i> <span>Examination</span></a></li>
+            <li><a href="student-section.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-users"></i> <span>Student Section</span></a></li>
+            <li><a href="hr-department.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></a></li>
+            <li><a href="accounts.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-book"></i> <span>Accounts</span></a></li>
+            <li><a href="progressions.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></a></li>
+            <li><a href="program-coordinator.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-check"></i> <span>Program Coordinator</span></a></li>
+            <li class="active"><a href="academics.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></a></li>
+            <li><a href="placements.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-building-columns"></i> <span>Placements</span></a></li>
+            <li><a href="pdic.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></a></li>
+            <li><a href="audit.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></a></li>
+            <li><a href="research.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-flask"></i> <span>Research</span></a></li>
+            <li><a href="extension.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></a></li>
+            <li><a href="consultancy.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></a></li>
         </ul>
     </div>
 
@@ -310,8 +296,20 @@
         </div>
     </div>
 
-<script src="dashboard.js"></script>
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+
+    // Mobile behaviour
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("show");
+        return;
+    }
+
+    // Desktop behaviour
+    sidebar.classList.toggle("collapsed");
+}
+</script>
 
 </body>
 </html>
-

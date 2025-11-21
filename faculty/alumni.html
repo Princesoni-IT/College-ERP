@@ -296,8 +296,20 @@
         </div>
     </div>
 
-<script src="dashboard.js"></script>
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
 
+    // Mobile behaviour
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("show");
+        return;
+    }
+
+    // Desktop behaviour
+    sidebar.classList.toggle("collapsed");
+}
+</script>
 
 </body>
 </html>
