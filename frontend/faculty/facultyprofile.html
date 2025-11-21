@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Profile - ERP Dashboard</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #103b77;
+            --primary-light: rgba(16, 59, 119, 0.1);
+            --bg: #f4f6fb;
+            --text: #1f2a37;
+            --muted: #6b7a99;
+            --card-shadow: 0 18px 40px rgba(16, 59, 119, 0.12);
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: var(--primary);
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: 0.4s;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar h2 {
+            padding: 15px 20px;
+            font-size: 20px;
+            margin: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 20px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .sidebar ul li.active,
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .content {
+            margin-left: 250px;
+            transition: 0.4s;
+        }
+
+        /* Topbar */
+        .topbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-container img {
+            height: 55px;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .heading-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .college-year {
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .top-right i {
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .top-right i:hover {
+            color: var(--primary);
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: background 0.3s;
+        }
+
+        .profile-area:hover {
+            background: rgba(16, 59, 119, 0.08);
+        }
+
+        .profile-img {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #d0d7e2;
+        }
+
+        .profile-text {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Page Layout */
+        .page-content {
+            padding: 25px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .page-title {
+            font-size: 30px;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--primary);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 15px 25px rgba(16, 59, 119, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: var(--primary);
+            border: 1px solid rgba(16, 59, 119, 0.2);
+            box-shadow: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .profile-card {
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--primary-light);
+            margin-bottom: 15px;
+        }
+
+        .profile-card h2 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .profile-card p {
+            margin: 4px 0;
+            color: var(--muted);
+        }
+
+        .info-grid {
+            margin-top: 18px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .info-pill {
+            border: 1px solid rgba(16, 59, 119, 0.15);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+        }
+
+        .info-pill i {
+            color: var(--primary);
+        }
+
+        .section-title {
+            margin: 0 0 12px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .contact-card ul,
+        .documents-list,
+        .timeline-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-card li,
+        .documents-list li,
+        .timeline-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            border-radius: 18px;
+            background: linear-gradient(145deg, #ffffff, #edf2fd);
+            border: 1px solid rgba(16, 59, 119, 0.1);
+            padding: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 22px;
+        }
+
+        .stat-info h3 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(16, 59, 119, 0.08);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .timeline-list li {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline-list li::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        .schedule-table th {
+            background: rgba(16, 59, 119, 0.05);
+            color: var(--primary);
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34, 197, 94, 0.15); color: #15803d; }
+        .tag.warning { background: rgba(249, 115, 22, 0.18); color: #c2410c; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                flex-direction: column;
+                height: auto;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .logo-text {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+            <li><a href="dashboard.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
+            <li><a href="alumni.html"><i class="fa-solid fa-user-graduate"></i> Alumni</a></li>
+            <li><a href="examination.html"><i class="fa-solid fa-file"></i> Examination</a></li>
+            <li><a href="student-section.html"><i class="fa-solid fa-users"></i> Student Section</a></li>
+            <li><a href="hr-department.html"><i class="fa-solid fa-briefcase"></i> HR Department</a></li>
+            <li><a href="accounts.html"><i class="fa-solid fa-book"></i> Accounts</a></li>
+            <li><a href="progressions.html"><i class="fa-solid fa-chart-line"></i> Progressions</a></li>
+            <li><a href="academics.html"><i class="fa-solid fa-chalkboard"></i> Academics</a></li>
+            <li><a href="placements.html"><i class="fa-solid fa-building-columns"></i> Placements</a></li>
+            <li><a href="pdic.html"><i class="fa-solid fa-lightbulb"></i> PDIC</a></li>
+            <li><a href="audit.html"><i class="fa-solid fa-scale-balanced"></i> Audit</a></li>
+            <li><a href="research.html"><i class="fa-solid fa-flask"></i> Research</a></li>
+            <li><a href="extension.html"><i class="fa-solid fa-puzzle-piece"></i> Extension</a></li>
+            <li><a href="consultancy.html"><i class="fa-solid fa-handshake"></i> Consultancy</a></li>
+            
+        </ul>
+    </aside>
+
+    <main class="content">
+        <!-- Top Navbar -->
+        <div class="topbar">
+            <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+                <div class="logo-text">
+                    <div class="heading-title">Prestige Institute of Management and Research</div>
+                    <div class="college-year">2025-2026</div>
+                </div>
+            </div>
+
+            <div class="top-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-circle-question"></i>
+                <i class="fa-solid fa-bell"></i>
+
+                <a href="facultyprofile.html" class="profile-area">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img" alt="Profile">
+                    <span class="profile-text">Hello! Faculty</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <section class="page-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Faculty Profile</h1>
+                    <p>Personal dashboard for Dr. Priya Sharma</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn secondary"><i class="fa-solid fa-download"></i> Download Profile</button>
+                    <button class="btn"><i class="fa-solid fa-pen"></i> Update Details</button>
+                </div>
+            </div>
+
+            <div class="profile-layout">
+                <div class="profile-column">
+                    <div class="card profile-card">
+                        <img src="https://i.pravatar.cc/180?img=48" alt="Faculty" class="profile-avatar">
+                        <h2>Dr. Priya Sharma</h2>
+                        <p>Associate Professor, Computer Science</p>
+                        <p class="badge">Employee ID: TCF-1089</p>
+
+                        <div class="info-grid">
+                            <div class="info-pill"><i class="fa-solid fa-sitemap"></i> School of Computing</div>
+                            <div class="info-pill"><i class="fa-solid fa-calendar"></i> Joining: 12 Aug 2016</div>
+                            <div class="info-pill"><i class="fa-solid fa-graduation-cap"></i> Ph.D. - Machine Learning</div>
+                            <div class="info-pill"><i class="fa-solid fa-language"></i> English, Hindi</div>
+                        </div>
+                    </div>
+
+                    <div class="card contact-card">
+                        <h3 class="section-title">Contact & Availability</h3>
+                        <ul>
+                            <li><i class="fa-solid fa-envelope"></i> priya.sharma@pimr.edu.in</li>
+                            <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+                            <li><i class="fa-solid fa-location-dot"></i> Cabin 204, Faculty Block C</li>
+                            <li><i class="fa-solid fa-clock"></i> Office Hours: Mon-Fri, 10:00 AM - 2:00 PM</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Key Documents</h3>
+                        <ul class="documents-list">
+                            <li><i class="fa-solid fa-file-lines"></i> Updated Resume - March 2025</li>
+                            <li><i class="fa-solid fa-certificate"></i> NAAC Research Grant Approval</li>
+                            <li><i class="fa-solid fa-chalkboard-user"></i> Academic Audit Report 2024</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="profile-column">
+                    <div class="card">
+                        <h3 class="section-title">Snapshot</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fa-solid fa-people-group"></i></div>
+                                <div class="stat-info">
+                                    <h3>320+</h3>
+                                    <p>Students Mentored</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
+                                <div class="stat-info">
+                                    <h3>6</h3>
+                                    <p>Courses this term</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fa-solid fa-flask"></i></div>
+                                <div class="stat-info">
+                                    <h3>12</h3>
+                                    <p>Publications</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+                                <div class="stat-info">
+                                    <h3>4</h3>
+                                    <p>Grants Running</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Recent Activity</h3>
+                        <ul class="timeline-list">
+                            <li>
+                                <div><strong>AI Ethics Workshop</strong><br><small>Hosted for MBA cohort on 10 Nov 2025</small></div>
+                            </li>
+                            <li>
+                                <div><strong>Research Paper Submitted</strong><br><small>"Edge AI for Smart Campuses" to IEEE Sensors Journal</small></div>
+                            </li>
+                            <li>
+                                <div><strong>Curriculum Review</strong><br><small>Updated Advanced ML syllabus for Semester VI</small></div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Today's Schedule</h3>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Course</th>
+                                    <th>Venue</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>09:00 - 10:30</td>
+                                    <td>Advanced Machine Learning</td>
+                                    <td>Lab Block L2</td>
+                                    <td><span class="tag success">In Progress</span></td>
+                                </tr>
+                                <tr>
+                                    <td>11:00 - 12:30</td>
+                                    <td>Research Mentorship</td>
+                                    <td>Innovation Hub</td>
+                                    <td><span class="tag warning">Prep</span></td>
+                                </tr>
+                                <tr>
+                                    <td>02:00 - 03:00</td>
+                                    <td>Faculty Review Meet</td>
+                                    <td>Board Room</td>
+                                    <td><span class="badge">Upcoming</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.toggle('show');
+                return;
+            }
+
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.content').classList.toggle('collapsed');
+        }
+
+        document.querySelectorAll('.profile-area').forEach(area => {
+            area.setAttribute('title', 'View Profile');
+        });
+    </script>
+
+</body>
+</html>

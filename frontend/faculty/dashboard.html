@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #103b77;
+            --primary-light: rgba(16, 59, 119, 0.12);
+            --bg: #f4f6fb;
+            --text: #1f2a37;
+            --muted: #6b7a99;
+            --card-shadow: 0 15px 40px rgba(16, 59, 119, 0.12);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1f2a37;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #103b77;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: 0.4s;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar h2 {
+            padding: 15px 20px;
+            font-size: 20px;
+            margin: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar.collapsed h2 {
+            display: none;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 20px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li i {
+            margin-right: 12px;
+        }
+
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar ul li.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+            transition: 0.4s;
+        }
+
+        .topbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 55px;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .heading-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .college-year {
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-right i {
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .top-right i:hover {
+            color: #103b77;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-img {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ccc;
+        }
+
+        .profile-text {
+            font-size: 14px;
+            color: gray;
+        }
+
+    
+
+        .page-content { padding: 20px; }
+
+        .hero-card {
+            background: linear-gradient(135deg, #103b77, #1f64b5);
+            border-radius: 24px;
+            padding: 32px;
+            color: #fff;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-card h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .hero-card p { margin: 8px 0 0; max-width: 520px; }
+
+        .hero-actions {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hero-profile-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 14px 18px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.2s, background 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-profile-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-profile-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-profile-card span {
+            display: block;
+            font-weight: 600;
+        }
+
+        .hero-profile-card small {
+            display: block;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.6); color: #fff; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-top: 28px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(16,59,119,0.05);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34,197,94,0.16); color: #15803d; }
+        .tag.warning { background: rgba(249,115,22,0.16); color: #c2410c; }
+        .tag.info { background: rgba(16,59,119,0.12); color: var(--primary); }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .week-day {
+            border: 1px solid rgba(16,59,119,0.12);
+            border-radius: 18px;
+            padding: 16px;
+            background: #fff;
+        }
+
+        .week-day h4 {
+            margin: 0 0 8px;
+            color: var(--primary);
+        }
+
+        .week-slot + .week-slot { margin-top: 10px; }
+        .week-slot strong { display: block; color: var(--text); }
+        .week-slot span { color: var(--muted); font-size: 13px; }
+
+        .insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .insight-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid rgba(16,59,119,0.08);
+        }
+
+        .insight-card h3 { margin: 0; font-size: 28px; color: var(--primary); }
+        .insight-card p { margin: 4px 0 0; color: var(--muted); }
+
+        @media (max-width: 1024px) {
+            .sidebar { left: -250px; }
+            .sidebar.show { left: 0; }
+            .content { margin-left: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .topbar { flex-direction: column; gap: 10px; height: auto; padding: 14px; }
+            .hero-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+            <li class="active"><a href="dashboard.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
+            <li><a href="alumni.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-user-graduate"></i> <span>Alumni</span></a></li>
+            <li><a href="examination.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-file"></i> <span>Examination</span></a></li>
+            <li><a href="student-section.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-users"></i> <span>Student Section</span></a></li>
+            <li><a href="hr-department.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-briefcase"></i> <span>HR Department</span></a></li>
+            <li><a href="accounts.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-book"></i> <span>Accounts</span></a></li>
+            <li><a href="progressions.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chart-line"></i> <span>Progressions</span></a></li>
+            <li><a href="academics.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-chalkboard"></i> <span>Academics</span></a></li>
+            <li><a href="placements.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-building-columns"></i> <span>Placements</span></a></li>
+            <li><a href="pdic.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-lightbulb"></i> <span>PDIC</span></a></li>
+            <li><a href="audit.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-scale-balanced"></i> <span>AUDIT</span></a></li>
+            <li><a href="research.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-flask"></i> <span>Research</span></a></li>
+            <li><a href="extension.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-puzzle-piece"></i> <span>Extension</span></a></li>
+            <li><a href="consultancy.html" style="text-decoration: none; color: white; display: flex; align-items: center; width: 100%;"><i class="fa-solid fa-handshake"></i> <span>Consultancy</span></a></li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        <div class="topbar">
+            <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+                <div class="logo-text">
+                    <div class="heading-title">Prestige Institute of Management and Research</div>
+                    <div class="college-year">2025-2026</div>
+                </div>
+            </div>
+            <div class="top-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-circle-question"></i>
+                <i class="fa-solid fa-bell"></i>
+                <a href="facultyprofile.html" class="profile-area">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-img">
+                    <span class="profile-text" id="profileName">Hello Faculty</span>
+                </a>
+            </div>
+        </div>
+
+        <section class="page-content">
+            <div class="hero-card">
+                <div>
+                    <p id="greetingBadge">Good Evening</p>
+                    <h1 id="greetingTitle">Hello, Dr. Priya Sharma 👋</h1>
+                    <p>Here is a quick overview of your classes, meetings and research commitments for today. Stay on top of your schedule with a single glance.</p>
+                </div>
+                <div class="hero-actions">
+                    <a href="facultyprofile.html" class="hero-profile-card">
+                        <img src="https://i.pravatar.cc/140?img=48" alt="Faculty portrait">
+                        <div>
+                            <span>Dr. Priya Sharma</span>
+                            <small>Associate Professor · View profile</small>
+                        </div>
+                    </a>
+                    <button class="btn ghost">
+                        <i class="fa-solid fa-calendar-plus"></i> Add Task
+                    </button>
+                </div>
+            </div>
+
+            <div class="insights" style="margin-top:24px;">
+                <div class="insight-card">
+                    <h3>3</h3>
+                    <p>Classes Today</p>
+                </div>
+                <div class="insight-card">
+                    <h3>12</h3>
+                    <p>Meetings this Week</p>
+                </div>
+                <div class="insight-card">
+                    <h3>2</h3>
+                    <p>Pending Approvals</p>
+                </div>
+                <div class="insight-card">
+                    <h3>4</h3>
+                    <p>Research Reviews</p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3 class="section-title">Today's Schedule</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Course</th>
+                                <th>Venue</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>09:00 - 10:30</td>
+                                <td>Advanced Machine Learning</td>
+                                <td>Lab Block L2</td>
+                                <td><span class="tag success">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>11:00 - 12:30</td>
+                                <td>Research Mentorship</td>
+                                <td>Innovation Hub</td>
+                                <td><span class="tag warning">Prep</span></td>
+                            </tr>
+                            <tr>
+                                <td>02:00 - 03:00</td>
+                                <td>Faculty Review Meet</td>
+                                <td>Board Room</td>
+                                <td><span class="tag info">Upcoming</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">This Week at a Glance</h3>
+                    <div class="week-grid">
+                        <div class="week-day">
+                            <h4>Monday</h4>
+                            <div class="week-slot">
+                                <strong>Data Structures (CSE-III)</strong>
+                                <span>10:00 - 11:30 • Room C204</span>
+                            </div>
+                            <div class="week-slot">
+                                <strong>Research Sync</strong>
+                                <span>15:00 - 16:00 • Innovation Hub</span>
+                            </div>
+                        </div>
+                        <div class="week-day">
+                            <h4>Tuesday</h4>
+                            <div class="week-slot">
+                                <strong>Advanced ML Lab</strong>
+                                <span>09:30 - 11:00 • Lab L2</span>
+                            </div>
+                            <div class="week-slot">
+                                <strong>Curriculum Committee</strong>
+                                <span>13:00 - 14:30 • Board Room</span>
+                            </div>
+                        </div>
+                        <div class="week-day">
+                            <h4>Wednesday</h4>
+                            <div class="week-slot">
+                                <strong>Student Mentoring</strong>
+                                <span>11:00 - 12:00 • Block C Lounge</span>
+                            </div>
+                            <div class="week-slot">
+                                <strong>Grant Review Call</strong>
+                                <span>16:00 - 17:00 • Teams</span>
+                            </div>
+                        </div>
+                        <div class="week-day">
+                            <h4>Thursday</h4>
+                            <div class="week-slot">
+                                <strong>Deep Learning</strong>
+                                <span>10:00 - 11:30 • Smart Classroom 3</span>
+                            </div>
+                            <div class="week-slot">
+                                <strong>Industry Connect</strong>
+                                <span>14:00 - 15:30 • Auditorium</span>
+                            </div>
+                        </div>
+                        <div class="week-day">
+                            <h4>Friday</h4>
+                            <div class="week-slot">
+                                <strong>Assessment Workshop</strong>
+                                <span>09:00 - 11:00 • Seminar Hall</span>
+                            </div>
+                            <div class="week-slot">
+                                <strong>Research Writing Lab</strong>
+                                <span>13:00 - 15:00 • Lab L4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.toggle('show');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                document.querySelector('.content').classList.toggle('collapsed');
+            }
+        }
+
+        function updateGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = 'Good Evening';
+            if (hour < 12) greeting = 'Good Morning';
+            else if (hour < 17) greeting = 'Good Afternoon';
+            document.getElementById('greetingBadge').textContent = greeting;
+            document.getElementById('greetingTitle').textContent = `${greeting}, Dr. Priya Sharma 👋`;
+        }
+
+        updateGreeting();
+    </script>
+</body>
+</html>
