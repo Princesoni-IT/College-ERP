@@ -187,6 +187,136 @@
             color: #103b77;
         }
 
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: #5c678b;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #103b77;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(16, 59, 119, 0.18);
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: #103b77;
+            border: 1px solid rgba(16, 59, 119, 0.3);
+            box-shadow: none;
+        }
+
+        .dashboard-shell {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 30px rgba(16, 59, 119, 0.12);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #eff3fb);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.12);
+            box-shadow: 0 10px 24px rgba(16, 59, 119, 0.08);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 30px;
+            color: #103b77;
+        }
+
+        .stat-card p {
+            margin: 8px 0 0;
+            color: #5c678b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.1);
+            padding: 22px;
+            box-shadow: 0 12px 26px rgba(16, 59, 119, 0.1);
+            margin-top: 24px;
+        }
+
+        .section-title {
+            margin: 0 0 14px;
+            color: #103b77;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(16, 59, 119, 0.05);
+            color: #103b77;
+            font-weight: 600;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34, 197, 94, 0.15); color: #15803d; }
+        .tag.warning { background: rgba(249, 115, 22, 0.2); color: #9a3412; }
+        .tag.info { background: rgba(16, 59, 119, 0.15); color: #103b77; }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .list-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px dashed rgba(16, 59, 119, 0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
         /* ----------- RESPONSIVE ----------- */
         @media (max-width: 900px) {
             .logo-text {
@@ -293,11 +423,112 @@
         <!-- Page Content -->
         <div class="page-content">
             <div class="page-header">
-                <h1 class="page-title">Academics</h1>
+                <div>
+                    <h1 class="page-title">Academics Overview</h1>
+                    <p class="page-subtitle">Course planning, teaching loads, and curriculum health — centralized for quick actions.</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn"><i class="fa-solid fa-calendar-plus"></i> Schedule Class</button>
+                    <button class="btn secondary"><i class="fa-solid fa-file-export"></i> Share Syllabus</button>
+                </div>
             </div>
-            <p>Welcome to the Academics section. Here you can manage courses, syllabus, faculty assignments, and other academic activities.</p>
-            
-            <!-- Add more content specific to Academics section here -->
+
+            <div class="dashboard-shell">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h2>64</h2>
+                        <p>Active Courses</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>482</h2>
+                        <p>Faculty Sessions This Week</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>18</h2>
+                        <p>Curriculum Revisions</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>92%</h2>
+                        <p>Syllabus Coverage</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">Course Load Snapshot</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Faculty Lead</th>
+                                <th>Semester</th>
+                                <th>Enrolled</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Advanced Machine Learning</td>
+                                <td>Dr. Priya Sharma</td>
+                                <td>V</td>
+                                <td>82</td>
+                                <td><span class="tag success">On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td>Strategic Finance</td>
+                                <td>Prof. Ashish Jain</td>
+                                <td>III</td>
+                                <td>67</td>
+                                <td><span class="tag info">Review</span></td>
+                            </tr>
+                            <tr>
+                                <td>Design Thinking Studio</td>
+                                <td>Ms. Riya Verma</td>
+                                <td>II</td>
+                                <td>54</td>
+                                <td><span class="tag warning">Labs Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="split-grid">
+                    <div class="card">
+                        <h3 class="section-title">Curriculum Tasks</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <span>Update Bloom's taxonomy mapping – BBA core</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Edit</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Publish Continuous Assessment Plan</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Publish</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Assign mentors for capstone cohort</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Assign</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Academic Alerts</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <span>3 courses below attendance threshold</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">View</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Faculty workload exceeds policy in 2 departments</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Balance</button>
+                            </div>
+                            <div class="list-item">
+                                <span>NAAC documentation due by 30 Nov</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Prepare</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

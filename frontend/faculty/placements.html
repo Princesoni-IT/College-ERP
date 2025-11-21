@@ -187,6 +187,136 @@
             color: #103b77;
         }
 
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: #5c678b;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #103b77;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(16, 59, 119, 0.18);
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: #103b77;
+            border: 1px solid rgba(16, 59, 119, 0.3);
+            box-shadow: none;
+        }
+
+        .dashboard-shell {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 30px rgba(16, 59, 119, 0.12);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #eff3fb);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.12);
+            box-shadow: 0 10px 24px rgba(16, 59, 119, 0.08);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 30px;
+            color: #103b77;
+        }
+
+        .stat-card p {
+            margin: 8px 0 0;
+            color: #5c678b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.1);
+            padding: 22px;
+            box-shadow: 0 12px 26px rgba(16, 59, 119, 0.1);
+            margin-top: 24px;
+        }
+
+        .section-title {
+            margin: 0 0 14px;
+            color: #103b77;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(16, 59, 119, 0.05);
+            color: #103b77;
+            font-weight: 600;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34, 197, 94, 0.15); color: #15803d; }
+        .tag.warning { background: rgba(249, 115, 22, 0.2); color: #9a3412; }
+        .tag.info { background: rgba(16, 59, 119, 0.15); color: #103b77; }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .list-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px dashed rgba(16, 59, 119, 0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
         /* ----------- RESPONSIVE ----------- */
         @media (max-width: 900px) {
             .logo-text {
@@ -293,11 +423,112 @@
         <!-- Page Content -->
         <div class="page-content">
             <div class="page-header">
-                <h1 class="page-title">Placements</h1>
+                <div>
+                    <h1 class="page-title">Placements Hub</h1>
+                    <p class="page-subtitle">Monitor recruiter engagement, offers pipeline, and placement readiness of every cohort.</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn"><i class="fa-solid fa-briefcase"></i> Add Company</button>
+                    <button class="btn secondary"><i class="fa-solid fa-file-lines"></i> Download Report</button>
+                </div>
             </div>
-            <p>Welcome to the Placements section. Here you can manage job placements, internships, company visits, and placement statistics.</p>
-            
-            <!-- Add more content specific to Placements section here -->
+
+            <div class="dashboard-shell">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h2>178</h2>
+                        <p>Recruiters Confirmed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>642</h2>
+                        <p>Students Placed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>₹ 18.2 LPA</h2>
+                        <p>Avg. CTC</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>74</h2>
+                        <p>Live Opportunities</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">Upcoming Drives</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Profile</th>
+                                <th>Date</th>
+                                <th>Eligible Cohorts</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Infosync Technologies</td>
+                                <td>Software Engineer</td>
+                                <td>22 Nov</td>
+                                <td>B.Tech CSE, IT</td>
+                                <td><span class="tag success">Ready</span></td>
+                            </tr>
+                            <tr>
+                                <td>Axis Capital</td>
+                                <td>Management Trainee</td>
+                                <td>25 Nov</td>
+                                <td>MBA Finance & Marketing</td>
+                                <td><span class="tag info">Shortlisting</span></td>
+                            </tr>
+                            <tr>
+                                <td>BrightWorks Studio</td>
+                                <td>UX Research Intern</td>
+                                <td>28 Nov</td>
+                                <td>B.Des, PDIC</td>
+                                <td><span class="tag warning">Docs Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="split-grid">
+                    <div class="card">
+                        <h3 class="section-title">Recruiter Follow-ups</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <span>Send slot confirmation – Deloitte Digital</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Send</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Share shortlisted resumes – TechNova</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Share</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Upload NDA for FinEdge Capital</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Placement Tasks</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <span>Finalize mock interview calendar</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Plan</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Release aptitude prep kit to final year</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Release</button>
+                            </div>
+                            <div class="list-item">
+                                <span>Review PPO requests from internships</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Review</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

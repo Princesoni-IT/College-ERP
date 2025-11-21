@@ -187,6 +187,160 @@
             color: #103b77;
         }
 
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: #5c678b;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #103b77;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(16, 59, 119, 0.18);
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: #103b77;
+            border: 1px solid rgba(16, 59, 119, 0.3);
+            box-shadow: none;
+        }
+
+        .dashboard-shell {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 30px rgba(16, 59, 119, 0.12);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #eff3fb);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.12);
+            box-shadow: 0 10px 24px rgba(16, 59, 119, 0.08);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 32px;
+            color: #103b77;
+        }
+
+        .stat-card p {
+            margin: 6px 0 0;
+            color: #5c678b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.1);
+            padding: 22px;
+            box-shadow: 0 12px 26px rgba(16, 59, 119, 0.1);
+            margin-top: 24px;
+        }
+
+        .section-title {
+            margin: 0 0 14px;
+            color: #103b77;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(16, 59, 119, 0.05);
+            color: #103b77;
+            font-weight: 600;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34, 197, 94, 0.15); color: #15803d; }
+        .tag.warning { background: rgba(249, 115, 22, 0.2); color: #9a3412; }
+        .tag.info { background: rgba(16, 59, 119, 0.15); color: #103b77; }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            border-left: 3px solid rgba(16, 59, 119, 0.15);
+            padding-left: 16px;
+        }
+
+        .timeline-item strong {
+            color: #103b77;
+        }
+
+        .timeline-item span {
+            color: #5c678b;
+            font-size: 13px;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .task-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px dashed rgba(16, 59, 119, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+
         /* ----------- RESPONSIVE ----------- */
         @media (max-width: 900px) {
             .logo-text {
@@ -293,11 +447,121 @@
         <!-- Page Content -->
         <div class="page-content">
             <div class="page-header">
-                <h1 class="page-title">Accounts Management</h1>
+                <div>
+                    <h1 class="page-title">Accounts Management</h1>
+                    <p class="page-subtitle">Keep track of institutional finances, reimbursements, and compliance approvals in one view.</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn"><i class="fa-solid fa-plus"></i> Log Expense</button>
+                    <button class="btn secondary"><i class="fa-solid fa-file-arrow-down"></i> Export Report</button>
+                </div>
             </div>
-            <p>Welcome to the Accounts Management section. Here you can manage financial records, invoices, payments, and other accounting activities.</p>
-            
-            <!-- Add more content specific to Accounts section here -->
+
+            <div class="dashboard-shell">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h2>₹ 12.5 Cr</h2>
+                        <p>Total Budget (FY 2025)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>₹ 8.9 Cr</h2>
+                        <p>Utilized Till Date</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>₹ 1.6 Cr</h2>
+                        <p>Pending Disbursement</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>42</h2>
+                        <p>Open Reimbursements</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">Recent Transactions</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Department</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>18 Nov</td>
+                                <td>Computer Science</td>
+                                <td>Lab Equipment Upgrade</td>
+                                <td>₹ 14,75,000</td>
+                                <td><span class="tag success">Cleared</span></td>
+                            </tr>
+                            <tr>
+                                <td>16 Nov</td>
+                                <td>Research Cell</td>
+                                <td>Grant Utilization – Phase II</td>
+                                <td>₹ 8,20,000</td>
+                                <td><span class="tag info">Processing</span></td>
+                            </tr>
+                            <tr>
+                                <td>12 Nov</td>
+                                <td>Admissions</td>
+                                <td>Scholarship Payout</td>
+                                <td>₹ 5,50,000</td>
+                                <td><span class="tag warning">Pending Docs</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="split-grid">
+                    <div class="card">
+                        <h3 class="section-title">Approval Timeline</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div>
+                                    <strong>Capital Asset Proposal</strong>
+                                    <span>Engineering Block · Raised by Prof. Mehta</span>
+                                </div>
+                                <span class="tag info">In Review</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div>
+                                    <strong>Consultancy Invoice Batch</strong>
+                                    <span>Industry Connect Cell</span>
+                                </div>
+                                <span class="tag success">Approved</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div>
+                                    <strong>Library Digitization Budget</strong>
+                                    <span>Awaiting VC sign-off</span>
+                                </div>
+                                <span class="tag warning">Escalated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Action Items</h3>
+                        <ul class="task-list">
+                            <li>
+                                <span>Verify travel claims – Marketing Summit</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">View</button>
+                            </li>
+                            <li>
+                                <span>Release stipend tranche – Research Fellows</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Process</button>
+                            </li>
+                            <li>
+                                <span>Upload quarterly TDS statements</span>
+                                <button class="btn secondary" style="padding: 6px 14px;">Upload</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
