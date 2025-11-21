@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAC Form</title>
+  <style>
+    :root {
+      --primary: #3498db;
+      --light-blue: #eaf4fc;
+      --border: #c7d9ec;
+      --text: #2c3e50;
+      --muted: #64748b;
+      --radius: 10px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: white;
+      color: var(--text);
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--light-blue);
+      padding: 25px 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    p.lead {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 25px;
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--light-blue);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #2177b4;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn.ghost:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>VAC Form</h1>
+    <p class="lead">Manual version (no uploads) based on the Program Coordinator Google Form</p>
+
+    <form id="programCoordinatorForm">
+
+      <!-- 1. Program Selection -->
+      <section>
+        <h2>Program Information</h2>
+        <label>Email *</label>
+        <input type="text" name="email" placeholder="Enter email">
+
+        <label>Program *</label>
+        <select name="program">
+          <option value="">Select Program</option>
+          <option>MBA FT</option>
+          <option>MBA BA</option>
+          <option>MBA Integrated</option>
+          <option>BBA</option>
+          <option>BCA</option>
+          <option>BCom</option>
+          <option>BA LLB (Hons.)</option>
+          <option>BBA LLB (Hons.)</option>
+          <option>BCom LLB (Hons.)</option>
+          <option>LLM</option>
+          <option>MCA</option>
+        </select>
+
+        <label>Program Code *</label>
+        <input type="text" name="program_code" placeholder="Enter Program Code">
+
+        <label>Coordinator Name *</label>
+        <input type="text" name="coordinator_name" placeholder="Enter Coordinator Name">
+      </section>
+
+      <!-- 2. Session Details -->
+      <section>
+        <h2>Session Details</h2>
+        <label>Session *</label>
+        <select name="session">
+          <option value="">Select Session</option>
+          <option>Jan - June 2025</option>
+          <option>Jul - Dec 2025</option>
+          <option>Jan - June 2026</option>
+        </select>
+
+        <label>Year of Introduction *</label>
+        <input type="number" name="year_intro" placeholder="e.g. 2019">
+
+        <label>Status of implementation of CBCS / Elective Course System *</label>
+        <select name="cbcs_status">
+          <option value="">Select</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label>Year of implementation *</label>
+        <input type="number" name="cbcs_year" placeholder="e.g. 2020">
+      </section>
+
+      <!-- 3. Courses Offered -->
+      <section>
+        <h2>List of Courses Offered</h2>
+        <table id="coursesTable">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Course Name</th>
+              <th>Course Code</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sno">1</td>
+              <td><input type="text" name="course_name[]" placeholder="Enter Course Name"></td>
+              <td><input type="text" name="course_code[]" placeholder="Enter Course Code"></td>
+              <td><button type="button" class="btn" onclick="addCourseRow()">Add</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. Syllabus Revision -->
+      <section>
+        <h2>Syllabus Revision Details</h2>
+        <label>Details of Programme where syllabus revision was carried out *</label>
+        <textarea name="syllabus_details" placeholder="Enter details..."></textarea>
+      </section>
+
+      <!-- 5. Employability / Skill Development Courses -->
+      <section>
+        <h2>Courses with Employability / Entrepreneurship / Skill Development Focus</h2>
+        <table id="focusTable">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Course Name</th>
+              <th>Employability</th>
+              <th>Entrepreneurship</th>
+              <th>Skill Dev</th>
+              <th>Ethics</th>
+              <th>Environment</th>
+              <th>Gender</th>
+              <th>Human Values</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sno">1</td>
+              <td><input type="text" name="focus_course_name[]" placeholder="Course"></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><select><option>-</option><option>Yes</option></select></td>
+              <td><button type="button" class="btn" onclick="addFocusRow()">Add</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 6. Value-Added Courses -->
+      <section>
+        <h2>Value Added Courses (VAC)</h2>
+        <table id="vacTable">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Course Name</th>
+              <th>Course Code</th>
+              <th>Duration (hrs)</th>
+              <th>Students Enrolled</th>
+              <th>Students Completed</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sno">1</td>
+              <td><input type="text" name="vac_course_name[]" placeholder="Name"></td>
+              <td><input type="text" name="vac_code[]" placeholder="Code"></td>
+              <td><input type="number" name="vac_hours[]" placeholder="Hours"></td>
+              <td><input type="number" name="vac_enrolled[]" placeholder="No."></td>
+              <td><input type="number" name="vac_completed[]" placeholder="No."></td>
+              <td><button type="button" class="btn" onclick="addVacRow()">Add</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 7. Other Sections -->
+      <section>
+        <h2>Additional Programme Details</h2>
+        <label>Details of E-content Development *</label>
+        <textarea placeholder="Enter details..."></textarea>
+
+        <label>Capacity Development and Skill Enhancement Activities *</label>
+        <textarea placeholder="List activities and outcomes..."></textarea>
+
+        <label>Participative, Experiential and Problem-Solving Components *</label>
+        <textarea placeholder="Enter details..."></textarea>
+
+        <label>Advanced and Slow Learners Measures *</label>
+        <textarea placeholder="Enter measures taken..."></textarea>
+
+        <label>Books Recommended to Library *</label>
+        <textarea placeholder="Enter recommended books..."></textarea>
+
+        <label>Innovative Pedagogy Used *</label>
+        <textarea placeholder="Enter details..."></textarea>
+
+        <label>Sessions for Competitive Exams and Career Counselling *</label>
+        <textarea placeholder="Enter session details..."></textarea>
+
+        <label>Collaborative Initiatives with Alumni/Organizations *</label>
+        <textarea placeholder="Enter collaboration details..."></textarea>
+
+        <label>Minutes of Meetings (Summary) *</label>
+        <textarea placeholder="Enter brief summary..."></textarea>
+      </section>
+
+      <footer>
+        <button type="reset" class="btn ghost">Reset</button>
+        <button type="submit" class="btn">Submit</button>
+      </footer>
+    </form>
+  </div>
+
+  <script>
+    function updateSerials(tableId) {
+      const rows = document.getElementById(tableId).tBodies[0].rows;
+      Array.from(rows).forEach((r, i) => {
+        const cell = r.querySelector('.sno');
+        if (cell) cell.textContent = i + 1;
+      });
+    }
+
+    function addCourseRow() {
+      const tbody = document.getElementById('coursesTable').tBodies[0];
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="sno"></td>
+        <td><input type="text" name="course_name[]" placeholder="Enter Course Name"></td>
+        <td><input type="text" name="course_code[]" placeholder="Enter Course Code"></td>
+        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
+      `;
+      tbody.appendChild(tr);
+      updateSerials('coursesTable');
+    }
+
+    function addFocusRow() {
+      const tbody = document.getElementById('focusTable').tBodies[0];
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="sno"></td>
+        <td><input type="text" name="focus_course_name[]" placeholder="Course"></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><select><option>-</option><option>Yes</option></select></td>
+        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
+      `;
+      tbody.appendChild(tr);
+      updateSerials('focusTable');
+    }
+
+    function addVacRow() {
+      const tbody = document.getElementById('vacTable').tBodies[0];
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="sno"></td>
+        <td><input type="text" name="vac_course_name[]" placeholder="Name"></td>
+        <td><input type="text" name="vac_code[]" placeholder="Code"></td>
+        <td><input type="number" name="vac_hours[]" placeholder="Hours"></td>
+        <td><input type="number" name="vac_enrolled[]" placeholder="No."></td>
+        <td><input type="number" name="vac_completed[]" placeholder="No."></td>
+        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
+      `;
+      tbody.appendChild(tr);
+      updateSerials('vacTable');
+    }
+
+    function removeRow(btn) {
+      const row = btn.closest('tr');
+      row.remove();
+      ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
+    });
+  </script>
+</body>
+</html>
