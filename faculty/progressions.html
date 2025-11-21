@@ -12,6 +12,16 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* Sidebar */
@@ -296,20 +306,8 @@
         </div>
     </div>
 
-<script>
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-
-    // Mobile behaviour
-    if (window.innerWidth <= 768) {
-        sidebar.classList.toggle("show");
-        return;
-    }
-
-    // Desktop behaviour
-    sidebar.classList.toggle("collapsed");
-}
-</script>
+<script src="dashboard.js"></script>
 
 </body>
 </html>
+

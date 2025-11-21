@@ -1,6 +1,9 @@
 // Toggle sidebar and save state
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector(".content");
+
+    if (!sidebar) return;
 
     // Mobile behaviour
     if (window.innerWidth <= 768) {
@@ -10,6 +13,9 @@ function toggleSidebar() {
 
     // Desktop behaviour
     sidebar.classList.toggle("collapsed");
+    if (content) {
+        content.classList.toggle("collapsed");
+    }
     
     // Save sidebar state to localStorage
     if (sidebar.classList.contains("collapsed")) {
@@ -22,11 +28,17 @@ function toggleSidebar() {
 // Restore sidebar state on page load
 document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector(".content");
+    
     if (sidebar) {
         const sidebarState = localStorage.getItem("sidebarState");
         
         if (sidebarState === "collapsed") {
             sidebar.classList.add("collapsed");
+            if (content) {
+                content.classList.add("collapsed");
+            }
         }
     }
 });
+
