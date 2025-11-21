@@ -231,6 +231,17 @@
     const adminBtn = document.getElementById('adminBtn');
     const facultyBtn = document.getElementById('facultyBtn');
     const roleBox = document.getElementById('roleBox');
+    const customSelect = document.getElementById("customSelect");
+    const selected = customSelect.querySelector(".selected");
+    const optionList = customSelect.querySelector(".options");
+    const options = optionList.querySelectorAll("li");
+
+    const credentials = {
+      admin: { username: 'admin123', password: 'admin123' },
+      faculty: { username: 'faculty123', password: 'faculty123' },
+      vac: { username: 'vac123', password: 'vac123' },
+      pc: { username: 'pc123', password: 'pc123' }
+    };
 
     // Hide role box for admin
     roleBox.style.display = 'none';
@@ -248,11 +259,6 @@
     });
 
     // Custom Select JS
-    const customSelect = document.getElementById("customSelect");
-    const selected = customSelect.querySelector(".selected");
-    const optionList = customSelect.querySelector(".options");
-    const options = optionList.querySelectorAll("li");
-
     selected.addEventListener("click", () => {
       optionList.style.display =
         optionList.style.display === "block" ? "none" : "block";
@@ -275,14 +281,52 @@
     function login() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
-      const role = selected.textContent;
+      const isAdmin = adminBtn.classList.contains('active');
+      const selectedRole = selected.getAttribute('data-value');
 
       if (!username || !password) {
         alert("Please fill all the fields!");
         return;
       }
 
-      alert('Login successful as ${role}');
+      if (isAdmin) {
+        if (username === credentials.admin.username && password === credentials.admin.password) {
+          window.location.href = 'admindashboard.html';
+        } else {
+          alert('Invalid admin credentials');
+        }
+        return;
+      }
+
+      if (!selectedRole || selectedRole === 'Role') {
+        alert('Please select a role');
+        return;
+      }
+
+      const roleKey =
+        selectedRole === 'Faculty' ? 'faculty' :
+        selectedRole === 'Program VAC' ? 'vac' :
+        selectedRole === 'Program Coordinator' ? 'pc' : null;
+
+      if (!roleKey) {
+        alert('This role is not yet configured.');
+        return;
+      }
+
+      if (
+        username === credentials[roleKey].username &&
+        password === credentials[roleKey].password
+      ) {
+        if (roleKey === 'vac') {
+          window.location.href = 'vacform.html';
+        } else if (roleKey === 'pc') {
+          window.location.href = 'programcordinatorform.html';
+        } else {
+          alert('Faculty logged in successfully');
+        }
+      } else {
+        alert('Invalid credentials for the selected role');
+      }
     }
   </script>
 
