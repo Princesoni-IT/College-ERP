@@ -187,6 +187,136 @@
             color: #103b77;
         }
 
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: #5c678b;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #103b77;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(16, 59, 119, 0.18);
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: #103b77;
+            border: 1px solid rgba(16, 59, 119, 0.3);
+            box-shadow: none;
+        }
+
+        .dashboard-shell {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 30px rgba(16, 59, 119, 0.12);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #eff3fb);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.12);
+            box-shadow: 0 10px 24px rgba(16, 59, 119, 0.08);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 30px;
+            color: #103b77;
+        }
+
+        .stat-card p {
+            margin: 8px 0 0;
+            color: #5c678b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid rgba(16, 59, 119, 0.1);
+            padding: 22px;
+            box-shadow: 0 12px 26px rgba(16, 59, 119, 0.1);
+            margin-top: 24px;
+        }
+
+        .section-title {
+            margin: 0 0 14px;
+            color: #103b77;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(16, 59, 119, 0.05);
+            color: #103b77;
+            font-weight: 600;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag.success { background: rgba(34, 197, 94, 0.15); color: #15803d; }
+        .tag.warning { background: rgba(249, 115, 22, 0.2); color: #9a3412; }
+        .tag.info { background: rgba(16, 59, 119, 0.15); color: #103b77; }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .list-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px dashed rgba(16, 59, 119, 0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
         /* ----------- RESPONSIVE ----------- */
         @media (max-width: 900px) {
             .logo-text {
@@ -293,11 +423,169 @@
         <!-- Page Content -->
         <div class="page-content">
             <div class="page-header">
-                <h1 class="page-title">Research</h1>
+                <div>
+                    <h1 class="page-title">Research</h1>
+                    <p class="page-subtitle">Advancing knowledge through innovative research projects and scholarly publications</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn"><i class="fa-solid fa-plus"></i> New Project</button>
+                    <button class="btn secondary"><i class="fa-solid fa-upload"></i> Submit Paper</button>
+                </div>
             </div>
-            <p>Welcome to the Research section. Here you can manage research projects, publications, grants, and research collaborations.</p>
-            
-            <!-- Add more content specific to Research section here -->
+
+            <div class="dashboard-shell">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h2>32</h2>
+                        <p>Active Projects</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>148</h2>
+                        <p>Publications</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>₹2.4M</h2>
+                        <p>Grants Received</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>89</h2>
+                        <p>Research Scholars</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">Current Research Projects</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Project Title</th>
+                                <th>Principal Investigator</th>
+                                <th>Funding Agency</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Budget</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AI in Healthcare Analytics</td>
+                                <td>Dr. Sharma</td>
+                                <td>DST</td>
+                                <td>2024-2026</td>
+                                <td><span class="tag success">Active</span></td>
+                                <td>₹8,50,000</td>
+                            </tr>
+                            <tr>
+                                <td>Sustainable Urban Development</td>
+                                <td>Dr. Kumar</td>
+                                <td>MoEF</td>
+                                <td>2025-2027</td>
+                                <td><span class="tag success">Active</span></td>
+                                <td>₹12,00,000</td>
+                            </tr>
+                            <tr>
+                                <td>Blockchain in Supply Chain</td>
+                                <td>Dr. Reddy</td>
+                                <td>AICTE</td>
+                                <td>2025-2028</td>
+                                <td><span class="tag warning">Starting</span></td>
+                                <td>₹6,00,000</td>
+                            </tr>
+                            <tr>
+                                <td>Machine Learning for Education</td>
+                                <td>Dr. Patel</td>
+                                <td>UGC</td>
+                                <td>2025-2029</td>
+                                <td><span class="tag info">Proposal</span></td>
+                                <td>₹15,00,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="split-grid">
+                    <div class="card">
+                        <h3 class="section-title">Recent Publications</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <div>
+                                    <strong>Deep Learning in Medical Imaging</strong><br>
+                                    <small style="color: #5c678b;">Nature AI • Dr. Sharma • Nov 2025</small>
+                                </div>
+                                <span class="tag success">Published</span>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <strong>Sustainable Business Models</strong><br>
+                                    <small style="color: #5c678b;">Journal of Business Ethics • Dr. Kumar • Oct 2025</small>
+                                </div>
+                                <span class="tag success">Published</span>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <strong>IoT Security Framework</strong><br>
+                                    <small style="color: #5c678b;">IEEE Transactions • Dr. Reddy • Sep 2025</small>
+                                </div>
+                                <span class="tag success">Published</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">Upcoming Conferences</h3>
+                        <div class="list-flex">
+                            <div class="list-item">
+                                <div>
+                                    <strong>International AI Summit 2025</strong><br>
+                                    <small style="color: #5c678b;">Dec 15-17, 2025 • Dubai</small>
+                                </div>
+                                <button class="btn" style="padding: 6px 12px; font-size: 12px;">Register</button>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <strong>Global Education Conference</strong><br>
+                                    <small style="color: #5c678b;">Jan 8-10, 2026 • Singapore</small>
+                                </div>
+                                <button class="btn" style="padding: 6px 12px; font-size: 12px;">Register</button>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <strong>Sustainable Development Forum</strong><br>
+                                    <small style="color: #5c678b;">Feb 20-22, 2026 • Delhi</small>
+                                </div>
+                                <button class="btn secondary" style="padding: 6px 12px; font-size: 12px;">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title">Research Tasks & Deadlines</h3>
+                    <div class="list-flex">
+                        <div class="list-item">
+                            <div>
+                                <strong>Submit DST progress report</strong><br>
+                                <small style="color: #5c678b;">AI Healthcare Project • Due today</small>
+                            </div>
+                            <button class="btn" style="padding: 6px 12px; font-size: 12px;">Submit</button>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <strong>Review research proposals</strong><br>
+                                <small style="color: #5c678b;">5 pending proposals • Due tomorrow</small>
+                            </div>
+                            <button class="btn" style="padding: 6px 12px; font-size: 12px;">Review</button>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <strong>Update research database</strong><br>
+                                <small style="color: #5c678b;">All projects • Due Dec 5</small>
+                            </div>
+                            <button class="btn secondary" style="padding: 6px 12px; font-size: 12px;">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
