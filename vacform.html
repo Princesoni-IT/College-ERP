@@ -4,37 +4,127 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VAC Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #3498db;
-      --light-blue: #eaf4fc;
-      --border: #c7d9ec;
-      --text: #2c3e50;
-      --muted: #64748b;
-      --radius: 10px;
+      --sidebar-bg: #103b77;
+      --page-bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --primary: #2b7bff;
+      --accent: #3498db;
+      --border: #d9e2f3;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
       font-family: "Poppins", sans-serif;
     }
 
     body {
       margin: 0;
-      background: white;
+      background: var(--page-bg);
       color: var(--text);
+    }
+
+    .topbar {
+      height: 72px;
+      background: var(--card-bg);
+      box-shadow: 0 12px 25px rgba(16, 59, 119, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-container img {
+      height: 52px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .heading-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--sidebar-bg);
+    }
+
+    .college-year {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+    }
+
+    .top-right i {
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .top-right i:hover {
+      color: var(--sidebar-bg);
+    }
+
+    .profile-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #e2e8f0;
+    }
+
+    .profile-text {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .page-wrapper {
       padding: 30px;
     }
 
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      background: var(--light-blue);
+      background: var(--card-bg);
       padding: 25px 30px;
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 16px 30px rgba(15, 47, 100, 0.08);
     }
 
     h1 {
       text-align: center;
-      color: var(--primary);
+      color: var(--sidebar-bg);
       margin-bottom: 8px;
     }
 
@@ -46,16 +136,17 @@
     }
 
     section {
-      background: white;
+      background: var(--card-bg);
       border-radius: var(--radius);
       padding: 20px;
       margin-bottom: 25px;
       border: 1px solid var(--border);
+      box-shadow: 0 8px 18px rgba(15, 47, 100, 0.05);
     }
 
     h2 {
       font-size: 18px;
-      color: var(--primary);
+      color: var(--accent);
       margin-bottom: 10px;
     }
 
@@ -132,6 +223,23 @@
       margin-top: 15px;
     }
 
+    @media (max-width: 600px) {
+      .topbar {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .top-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .page-wrapper {
+        padding: 20px;
+      }
+    }
+
     @media (max-width: 768px) {
       table, thead, tbody, th, td, tr { display: block; }
       th { display: none; }
@@ -140,6 +248,26 @@
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        <div class="heading-title">Prestige Institute of Management and Research</div>
+        <div class="college-year">2025-2026</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-circle-question"></i>
+      <i class="fa-solid fa-bell"></i>
+      <div class="profile-area">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img" alt="Profile">
+        <span class="profile-text">Hello! Faculty</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
   <div class="container">
     <h1>VAC Form</h1>
     <p class="lead">Manual version (no uploads) based on the Program Coordinator Google Form</p>
@@ -330,6 +458,7 @@
         <button type="submit" class="btn">Submit</button>
       </footer>
     </form>
+  </div>
   </div>
 
   <script>
