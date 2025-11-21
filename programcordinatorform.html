@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program Coordinator Form</title>
+  <title>Programme Coordinator Form</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sidebar-bg: #103b77;
-      --page-bg: #f4f6fb;
+      --sidebar-bg: #1b2d83;
+      --page-bg: #f0f4f8;
       --card-bg: #ffffff;
-      --primary: #2b7bff;
-      --accent: #3498db;
-      --border: #d9e2f3;
-      --text: #1f2937;
-      --muted: #6b7280;
+      --primary: #1b2d83;
+      --accent: #1b2d83;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
       --radius: 14px;
+      --danger: #e74c3c;
     }
 
     * {
@@ -122,32 +123,51 @@
       box-shadow: 0 16px 30px rgba(15, 47, 100, 0.08);
     }
 
-    h1 {
-      text-align: center;
-      color: var(--sidebar-bg);
-      margin-bottom: 8px;
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border);
     }
 
-    p.lead {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 25px;
-      font-size: 14px;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    section {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 25px;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 18px rgba(15, 47, 100, 0.05);
+    .page-title {
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .header-icon {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-right select {
+      min-width: 180px;
+      border-color: #b0c4de;
     }
 
     h2 {
-      font-size: 18px;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     label {
@@ -156,13 +176,21 @@
       margin-bottom: 6px;
     }
 
-    input[type="text"], input[type="number"], input[type="date"], input[type="email"], textarea, select {
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select,
+    input[type="file"] {
       width: 100%;
       padding: 10px;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 14px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      background: white;
+      color: var(--text);
     }
 
     textarea {
@@ -170,34 +198,109 @@
       min-height: 70px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 14px;
+    input[type="file"] {
+      padding: 5px;
     }
 
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px;
-      text-align: left;
+    .form-row {
+      display: flex;
+      gap: 20px;
     }
 
-    th {
-      background-color: rgba(16, 59, 119, 0.05);
-      color: var(--text);
+    .form-group {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 5px;
+      margin-bottom: 12px;
+      height: 42px;
+    }
+
+    .radio-group label {
+      margin-bottom: 0;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      gap: 10px;
+    }
+
+    .option {
+      flex: 1;
+      background: var(--card-bg);
+      padding: 12px;
+      text-align: center;
+      border-radius: var(--radius);
       font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+      color: var(--primary);
+      box-shadow: 0 8px 18px rgba(15, 47, 100, 0.05);
+    }
+
+    .option:hover,
+    .option.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .content-box {
+      margin-top: 20px;
+      padding: 25px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: none;
+      box-shadow: 0 8px 18px rgba(15, 47, 100, 0.05);
+    }
+
+    .content-box h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .file-upload-info {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .btn {
+      padding: 10px 18px;
       background: var(--primary);
       color: white;
       border: none;
       border-radius: 6px;
-      padding: 8px 14px;
       cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background 0.2s;
     }
 
     .btn:hover {
@@ -215,12 +318,93 @@
       color: white;
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      margin-top: 15px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px 30px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 800px;
+      border-radius: var(--radius);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-close {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .preview-section {
+      margin-bottom: 20px;
+    }
+
+    .preview-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .preview-item {
+      display: flex;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .preview-label {
+      font-weight: 500;
+      color: var(--muted);
+      width: 40%;
+      flex-shrink: 0;
+    }
+
+    .preview-value {
+      width: 60%;
+      word-wrap: break-word;
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .header-right {
+        width: 100%;
+      }
     }
 
     @media (max-width: 600px) {
@@ -238,12 +422,26 @@
       .page-wrapper {
         padding: 20px;
       }
-    }
 
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr { display: block; }
-      th { display: none; }
-      td { border: none; border-bottom: 1px solid var(--border); }
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .radio-group {
+        height: auto;
+        padding: 10px 0;
+      }
+
+      .preview-item {
+        flex-direction: column;
+        margin-bottom: 12px;
+      }
+
+      .preview-label,
+      .preview-value {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -269,263 +467,300 @@
 
   <div class="page-wrapper">
     <div class="container">
-      <h1>Program Coordinator Form</h1>
-      <p class="lead">Manual submission template mirroring the official Program Coordinator Google Form.</p>
-
-      <form id="programCoordinatorForm">
-
-        <!-- 1. Program Selection -->
-        <section>
-          <h2>Program Information</h2>
-          <label>Email *</label>
-          <input type="email" name="email" placeholder="Enter email">
-
-          <label>Program *</label>
-          <select name="program">
-            <option value="">Select Program</option>
-            <option>MBA FT</option>
-            <option>MBA BA</option>
-            <option>MBA Integrated</option>
-            <option>BBA</option>
-            <option>BCA</option>
-            <option>BCom</option>
-            <option>BA LLB (Hons.)</option>
-            <option>BBA LLB (Hons.)</option>
-            <option>BCom LLB (Hons.)</option>
-            <option>LLM</option>
-            <option>MCA</option>
+      <header class="page-header">
+        <div class="header-left">
+          <i class="fas fa-file-alt header-icon"></i>
+          <h1 class="page-title">Programme Coordinator Form</h1>
+        </div>
+        <div class="header-right">
+          <label for="session-select"><b>Session:</b></label>
+          <select id="session-select" name="session">
+            <option>Jan-June-2025</option>
+            <option>July-Dec-2025</option>
           </select>
+        </div>
+      </header>
 
-          <label>Program Code *</label>
-          <input type="text" name="program_code" placeholder="Enter Program Code">
+      <h2><i class="fas fa-info-circle"></i> Basic Information</h2>
 
-          <label>Coordinator Name *</label>
-          <input type="text" name="coordinator_name" placeholder="Enter Coordinator Name">
-        </section>
+      <form id="main-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email <span class="required">*</span></label>
+            <input type="email" id="email" placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label>Name of Program <span class="required">*</span></label>
+            <select id="program-name">
+              <option>Select Program</option>
+              <option>BCA</option>
+              <option>BBA</option>
+              <option>BCOM</option>
+            </select>
+          </div>
+        </div>
 
-        <!-- 2. Session Details -->
-        <section>
-          <h2>Session Details</h2>
-          <label>Session *</label>
-          <select name="session">
-            <option value="">Select Session</option>
-            <option>Jan - June 2025</option>
-            <option>Jul - Dec 2025</option>
-            <option>Jan - June 2026</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Program Code <span class="required">*</span></label>
+            <input type="text" id="program-code" placeholder="Enter program code">
+          </div>
+          <div class="form-group">
+            <label>Coordinator Name <span class="required">*</span></label>
+          <input type="text" id="coordinator-name" placeholder="Enter coordinator name">
+        </div>
+      </div>
 
-          <label>Year of Introduction *</label>
-          <input type="number" name="year_intro" placeholder="e.g. 2019">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Year of Introduction <span class="required">*</span></label>
+          <input type="date" id="year-introduction">
+        </div>
+        <div class="form-group">
+          <label>CBCS Implementation Status <span class="required">*</span></label>
+          <div class="radio-group">
+            <label for="cbcs_yes">
+              <input type="radio" id="cbcs_yes" name="cbcs_status" value="yes" onclick="toggleCBCSYear(true)">
+              Yes
+            </label>
+            <label for="cbcs_no">
+              <input type="radio" id="cbcs_no" name="cbcs_status" value="no" onclick="toggleCBCSYear(false)">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
 
-          <label>Status of implementation of CBCS / Elective Course System *</label>
-          <select name="cbcs_status">
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
+      <div class="form-group" id="cbcs-year-group" style="display: none">
+        <label>Year of implementation of CBCS</label>
+        <input type="text" id="cbcs-year" placeholder="Enter year (e.g., 2020)">
+      </div>
+    </form>
 
-          <label>Year of implementation *</label>
-          <input type="number" name="cbcs_year" placeholder="e.g. 2020">
-        </section>
+    <div class="options">
+      <div class="option" onclick="showBox('courses', this)">
+        <i class="fas fa-book"></i> Courses &amp; Curriculum
+      </div>
+      <div class="option" onclick="showBox('skills', this)">
+        <i class="fas fa-cogs"></i> Skill Development
+      </div>
+      <div class="option" onclick="showBox('pedagogy', this)">
+        <i class="fas fa-chalkboard-teacher"></i> Pedagogy &amp; Activities
+      </div>
+    </div>
 
-        <!-- 3. Courses Offered -->
-        <section>
-          <h2>List of Courses Offered</h2>
-          <table id="coursesTable">
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Course Name</th>
-                <th>Course Code</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="sno">1</td>
-                <td><input type="text" name="course_name[]" placeholder="Enter Course Name"></td>
-                <td><input type="text" name="course_code[]" placeholder="Enter Course Code"></td>
-                <td><button type="button" class="btn" onclick="addCourseRow()">Add</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+    <div id="courses" class="content-box">
+      <h2>Courses &amp; Curriculum</h2>
+      <div class="mb-4">
+        <label>
+          List of courses offered <span class="required">*</span>
+        </label>
+        <input type="file" id="file-courses">
+        <div class="file-upload-info">
+          Accepted formats: PDF, DOC, XLS, JPG, PNG
+        </div>
+      </div>
+      <div class="mb-4">
+        <label>Syllabus Revision Document <span class="required">*</span></label>
+        <input type="file" id="file-syllabus">
+      </div>
+      <div class="mb-4">
+        <label>
+          Employability / Skill Development Courses
+          <span class="required">*</span>
+        </label>
+        <input type="file" id="file-employability">
+      </div>
+      <div class="mb-4">
+        <label>Value Added Courses <span class="required">*</span></label>
+        <input type="file" id="file-value-added">
+      </div>
+      <div class="mb-4">
+        <label>E-content Development <span class="required">*</span></label>
+        <input type="file" id="file-e-content">
+      </div>
+    </div>
 
-        <!-- 4. Syllabus Revision -->
-        <section>
-          <h2>Syllabus Revision Details</h2>
-          <label>Details of Programme where syllabus revision was carried out *</label>
-          <textarea name="syllabus_details" placeholder="Enter details..."></textarea>
-        </section>
+    <div id="skills" class="content-box">
+      <h2>Skill Development</h2>
+      <div class="mb-4">
+        <label>Capacity Development Activities <span class="required">*</span></label>
+        <input type="file" id="file-capacity">
+      </div>
+      <div class="mb-4">
+        <label>Experiential Learning <span class="required">*</span></label>
+        <input type="file" id="file-experiential">
+      </div>
+      <div class="mb-4">
+        <label>Advanced &amp; Slow Learners <span class="required">*</span></label>
+        <input type="file" id="file-learners">
+      </div>
+      <div class="mb-4">
+        <label>Library Books Recommended <span class="required">*</span></label>
+        <input type="file" id="file-library">
+      </div>
+    </div>
 
-        <!-- 5. Employability / Skill Development Courses -->
-        <section>
-          <h2>Courses with Employability / Entrepreneurship / Skill Development Focus</h2>
-          <table id="focusTable">
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Course Name</th>
-                <th>Employability</th>
-                <th>Entrepreneurship</th>
-                <th>Skill Dev</th>
-                <th>Ethics</th>
-                <th>Environment</th>
-                <th>Gender</th>
-                <th>Human Values</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="sno">1</td>
-                <td><input type="text" name="focus_course_name[]" placeholder="Course"></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><select><option>-</option><option>Yes</option></select></td>
-                <td><button type="button" class="btn" onclick="addFocusRow()">Add</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+    <div id="pedagogy" class="content-box">
+      <h2>Pedagogy &amp; Activities</h2>
+      <div class="mb-4">
+        <label>Innovative Pedagogy <span class="required">*</span></label>
+        <input type="file" id="file-pedagogy">
+      </div>
+      <div class="mb-4">
+        <label>Career Counselling Sessions <span class="required">*</span></label>
+        <input type="file" id="file-counselling">
+      </div>
+      <div class="mb-4">
+        <label>Collaborative Initiatives <span class="required">*</span></label>
+        <input type="file" id="file-collaborative">
+      </div>
+      <div class="mb-4">
+        <label>Meeting Minutes <span class="required">*</span></label>
+        <input type="file" id="file-meeting">
+      </div>
+    </div>
 
-        <!-- 6. Value-Added Courses -->
-        <section>
-          <h2>Value Added Courses (VAC)</h2>
-          <table id="vacTable">
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Course Name</th>
-                <th>Course Code</th>
-                <th>Duration (hrs)</th>
-                <th>Students Enrolled</th>
-                <th>Students Completed</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="sno">1</td>
-                <td><input type="text" name="vac_course_name[]" placeholder="Name"></td>
-                <td><input type="text" name="vac_code[]" placeholder="Code"></td>
-                <td><input type="number" name="vac_hours[]" placeholder="Hours"></td>
-                <td><input type="number" name="vac_enrolled[]" placeholder="No."></td>
-                <td><input type="number" name="vac_completed[]" placeholder="No."></td>
-                <td><button type="button" class="btn" onclick="addVacRow()">Add</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+    <footer>
+      <div class="footer-left">
+        <button type="reset" class="btn ghost">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+        <button type="button" class="btn ghost" id="btn-preview">
+          <i class="fas fa-eye"></i> Preview
+        </button>
+      </div>
+      <div class="footer-right">
+        <button type="submit" class="btn" form="main-form">
+          Submit <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </footer>
+    </form>
+    </div>
+  </div>
 
-        <!-- 7. Other Sections -->
-        <section>
-          <h2>Additional Programme Details</h2>
-          <label>Details of E-content Development *</label>
-          <textarea placeholder="Enter details..."></textarea>
-
-          <label>Capacity Development and Skill Enhancement Activities *</label>
-          <textarea placeholder="List activities and outcomes..."></textarea>
-
-          <label>Participative, Experiential and Problem-Solving Components *</label>
-          <textarea placeholder="Enter details..."></textarea>
-
-          <label>Advanced and Slow Learners Measures *</label>
-          <textarea placeholder="Enter measures taken..."></textarea>
-
-          <label>Books Recommended to Library *</label>
-          <textarea placeholder="Enter recommended books..."></textarea>
-
-          <label>Innovative Pedagogy Used *</label>
-          <textarea placeholder="Enter details..."></textarea>
-
-          <label>Sessions for Competitive Exams and Career Counselling *</label>
-          <textarea placeholder="Enter session details..."></textarea>
-
-          <label>Collaborative Initiatives with Alumni/Organizations *</label>
-          <textarea placeholder="Enter collaboration details..."></textarea>
-
-          <label>Minutes of Meetings (Summary) *</label>
-          <textarea placeholder="Enter brief summary..."></textarea>
-        </section>
-
-        <footer>
-          <button type="reset" class="btn ghost">Reset</button>
-          <button type="submit" class="btn">Submit</button>
-        </footer>
-      </form>
+  <div id="preview-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2><i class="fas fa-file-invoice"></i> Form Preview</h2>
+      <div id="preview-data-container"></div>
     </div>
   </div>
 
   <script>
-    function updateSerials(tableId) {
-      const rows = document.getElementById(tableId).tBodies[0].rows;
-      Array.from(rows).forEach((r, i) => {
-        const cell = r.querySelector('.sno');
-        if (cell) cell.textContent = i + 1;
+    function toggleCBCSYear(show) {
+      const cbcsYearGroup = document.getElementById('cbcs-year-group');
+      cbcsYearGroup.style.display = show ? 'block' : 'none';
+    }
+
+    function showBox(boxId, option) {
+      document.querySelectorAll('.content-box').forEach((box) => {
+        box.style.display = 'none';
       });
-    }
-
-    function addCourseRow() {
-      const tbody = document.getElementById('coursesTable').tBodies[0];
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="sno"></td>
-        <td><input type="text" name="course_name[]" placeholder="Enter Course Name"></td>
-        <td><input type="text" name="course_code[]" placeholder="Enter Course Code"></td>
-        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
-      `;
-      tbody.appendChild(tr);
-      updateSerials('coursesTable');
-    }
-
-    function addFocusRow() {
-      const tbody = document.getElementById('focusTable').tBodies[0];
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="sno"></td>
-        <td><input type="text" name="focus_course_name[]" placeholder="Course"></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><select><option>-</option><option>Yes</option></select></td>
-        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
-      `;
-      tbody.appendChild(tr);
-      updateSerials('focusTable');
-    }
-
-    function addVacRow() {
-      const tbody = document.getElementById('vacTable').tBodies[0];
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="sno"></td>
-        <td><input type="text" name="vac_course_name[]" placeholder="Name"></td>
-        <td><input type="text" name="vac_code[]" placeholder="Code"></td>
-        <td><input type="number" name="vac_hours[]" placeholder="Hours"></td>
-        <td><input type="number" name="vac_enrolled[]" placeholder="No."></td>
-        <td><input type="number" name="vac_completed[]" placeholder="No."></td>
-        <td><button type="button" class="btn ghost" onclick="removeRow(this)">Remove</button></td>
-      `;
-      tbody.appendChild(tr);
-      updateSerials('vacTable');
-    }
-
-    function removeRow(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
+      document.querySelectorAll('.option').forEach((opt) => opt.classList.remove('active'));
+      document.getElementById(boxId).style.display = 'block';
+      if (option) option.classList.add('active');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
+      const modal = document.getElementById('preview-modal');
+      const btnPreview = document.getElementById('btn-preview');
+      const closeModal = document.querySelector('.modal-close');
+      const previewContainer = document.getElementById('preview-data-container');
+
+      function getFieldValue(id) {
+        const el = document.getElementById(id);
+        if (!el) return 'N/A';
+        if (el.type === 'date' && !el.value) return 'N/A';
+        return el.value || 'N/A';
+      }
+
+      function getRadioValue(name) {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : 'N/A';
+      }
+
+      function getFileValue(id) {
+        const el = document.getElementById(id);
+        return el && el.files.length > 0 ? el.files[0].name : 'No file selected';
+      }
+
+      function createPreviewSection(title, data) {
+        const itemsHTML = data.map((item) => `
+          <div class="preview-item">
+            <span class="preview-label">${item.label}</span>
+            <span class="preview-value">${item.value || 'N/A'}</span>
+          </div>
+        `).join('');
+
+        return `
+          <div class="preview-section">
+            <h3 class="preview-title">${title}</h3>
+            ${itemsHTML}
+          </div>
+        `;
+      }
+
+      function showPreview() {
+        const cbcsStatus = getRadioValue('cbcs_status');
+
+        const basicInfoData = [
+          { label: 'Email', value: getFieldValue('email') },
+          { label: 'Name of Program', value: getFieldValue('program-name') },
+          { label: 'Program Code', value: getFieldValue('program-code') },
+          { label: 'Coordinator Name', value: getFieldValue('coordinator-name') },
+          { label: 'Year of Introduction', value: getFieldValue('year-introduction') },
+          { label: 'CBCS Status', value: (cbcsStatus || '').toUpperCase() }
+        ];
+
+        if (cbcsStatus === 'yes') {
+          basicInfoData.push({
+            label: 'Year of CBCS Implementation',
+            value: getFieldValue('cbcs-year')
+          });
+        }
+
+        const coursesData = [
+          { label: 'List of courses offered', value: getFileValue('file-courses') },
+          { label: 'Syllabus Revision Document', value: getFileValue('file-syllabus') },
+          { label: 'Employability Courses', value: getFileValue('file-employability') },
+          { label: 'Value Added Courses', value: getFileValue('file-value-added') },
+          { label: 'E-content Development', value: getFileValue('file-e-content') }
+        ];
+
+        const skillsData = [
+          { label: 'Capacity Development', value: getFileValue('file-capacity') },
+          { label: 'Experiential Learning', value: getFileValue('file-experiential') },
+          { label: 'Advanced & Slow Learners', value: getFileValue('file-learners') },
+          { label: 'Library Books Recommended', value: getFileValue('file-library') }
+        ];
+
+        const pedagogyData = [
+          { label: 'Innovative Pedagogy', value: getFileValue('file-pedagogy') },
+          { label: 'Career Counselling', value: getFileValue('file-counselling') },
+          { label: 'Collaborative Initiatives', value: getFileValue('file-collaborative') },
+          { label: 'Meeting Minutes', value: getFileValue('file-meeting') }
+        ];
+
+        previewContainer.innerHTML = '';
+        previewContainer.innerHTML += createPreviewSection('Basic Information', basicInfoData);
+        previewContainer.innerHTML += createPreviewSection('Courses & Curriculum', coursesData);
+        previewContainer.innerHTML += createPreviewSection('Skill Development', skillsData);
+        previewContainer.innerHTML += createPreviewSection('Pedagogy & Activities', pedagogyData);
+
+        modal.style.display = 'flex';
+      }
+
+      btnPreview.onclick = showPreview;
+      closeModal.onclick = () => {
+        modal.style.display = 'none';
+      };
+      window.onclick = (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
     });
   </script>
 </body>
