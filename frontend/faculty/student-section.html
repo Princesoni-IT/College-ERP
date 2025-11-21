@@ -74,6 +74,10 @@
             transition: 0.4s;
         }
 
+        .content.collapsed {
+            margin-left: 60px;
+        }
+
         /* Top Navigation */
         .topbar {
             height: 70px;
@@ -138,6 +142,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            color: inherit;
         }
 
         .profile-img {
@@ -427,7 +433,6 @@
         </ul>
     </div>
 
-    
     <!-- Main Content -->
     <div class="content">
 
@@ -449,10 +454,10 @@
                 <i class="fa-solid fa-circle-question"></i>
                 <i class="fa-solid fa-bell"></i>
 
-                <div class="profile-area">
+                <a href="facultyprofile.html" class="profile-area">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img">
                     <span class="profile-text">Hello! Faculty</span>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -465,106 +470,106 @@
             
             <!-- Add more content specific to Student Section here -->
 
- <div class="dashboard-container">
-        <header class="dashboard-header">
-            <h1>Student Management</h1>
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Dashboard
-            </a>
-        </header>
+            <div class="dashboard-container">
+                <header class="dashboard-header">
+                    <h1>Student Management</h1>
+                    <a href="index.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </header>
 
-        <main class="content-container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <div class="stat-info">
-                        <h3>1,250</h3>
-                        <p>Total Students</p>
+                <main class="content-container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-info">
+                                <h3>1,250</h3>
+                                <p>Total Students</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-book-open"></i>
+                            <div class="stat-info">
+                                <h3>8</h3>
+                                <p>Active Courses</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clipboard-check"></i>
+                            <div class="stat-info">
+                                <h3>92%</h3>
+                                <p>Avg. Attendance</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-book-open"></i>
-                    <div class="stat-info">
-                        <h3>8</h3>
-                        <p>Active Courses</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-clipboard-check"></i>
-                    <div class="stat-info">
-                        <h3>92%</h3>
-                        <p>Avg. Attendance</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="controls-container">
-                <input type="text" placeholder="Search by name or roll no..." class="search-input">
-                <select class="filter-select">
-                    <option value="">Filter by Course</option>
-                    <option>B.Tech CSE</option>
-                    <option>B.Tech ME</option>
-                    <option>MBA</option>
-                </select>
-                 <select class="filter-select">
-                    <option value="">Filter by Year</option>
-                    <option>1st Year</option>
-                    <option>2nd Year</option>
-                    <option>3rd Year</option>
-                    <option>4th Year</option>
-                </select>
-            </div>
+                    <div class="controls-container">
+                        <input type="text" placeholder="Search by name or roll no..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">Filter by Course</option>
+                            <option>B.Tech CSE</option>
+                            <option>B.Tech ME</option>
+                            <option>MBA</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Filter by Year</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>4th Year</option>
+                        </select>
+                    </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Roll No.</th>
-                            <th>Student Name</th>
-                            <th>Course</th>
-                            <th>Year</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0101CS221001</td>
-                            <td>Aarav Sharma</td>
-                            <td>B.Tech CSE</td>
-                            <td>3rd</td>
-                            <td>aarav.sharma@example.com</td>
-                            <td><button class="btn-sm">View Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>0101ME231045</td>
-                            <td>Diya Singh</td>
-                            <td>B.Tech ME</td>
-                            <td>2nd</td>
-                            <td>diya.singh@example.com</td>
-                            <td><button class="btn-sm">View Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>0101MB241012</td>
-                            <td>Rohan Gupta</td>
-                            <td>MBA</td>
-                            <td>1st</td>
-                            <td>rohan.gupta@example.com</td>
-                            <td><button class="btn-sm">View Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>0101CS221015</td>
-                            <td>Sneha Patel</td>
-                            <td>B.Tech CSE</td>
-                            <td>3rd</td>
-                            <td>sneha.patel@example.com</td>
-                            <td><button class="btn-sm">View Details</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Roll No.</th>
+                                    <th>Student Name</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0101CS221001</td>
+                                    <td>Aarav Sharma</td>
+                                    <td>B.Tech CSE</td>
+                                    <td>3rd</td>
+                                    <td>aarav.sharma@example.com</td>
+                                    <td><button class="btn-sm">View Details</button></td>
+                                </tr>
+                                <tr>
+                                    <td>0101ME231045</td>
+                                    <td>Diya Singh</td>
+                                    <td>B.Tech ME</td>
+                                    <td>2nd</td>
+                                    <td>diya.singh@example.com</td>
+                                    <td><button class="btn-sm">View Details</button></td>
+                                </tr>
+                                <tr>
+                                    <td>0101MB241012</td>
+                                    <td>Rohan Gupta</td>
+                                    <td>MBA</td>
+                                    <td>1st</td>
+                                    <td>rohan.gupta@example.com</td>
+                                    <td><button class="btn-sm">View Details</button></td>
+                                </tr>
+                                <tr>
+                                    <td>0101CS221015</td>
+                                    <td>Sneha Patel</td>
+                                    <td>B.Tech CSE</td>
+                                    <td>3rd</td>
+                                    <td>sneha.patel@example.com</td>
+                                    <td><button class="btn-sm">View Details</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
             </div>
-        </main>
-    </div>
 
         </div>
     </div>
@@ -572,6 +577,7 @@
 <script>
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector('.content');
 
     // Mobile behaviour
     if (window.innerWidth <= 768) {
@@ -581,6 +587,7 @@ function toggleSidebar() {
 
     // Desktop behaviour
     sidebar.classList.toggle("collapsed");
+    content.classList.toggle("collapsed");
 }
 </script>
 

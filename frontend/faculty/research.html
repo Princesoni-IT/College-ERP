@@ -72,6 +72,10 @@
             transition: 0.4s;
         }
 
+        .content.collapsed {
+            margin-left: 60px;
+        }
+
         /* Top Navigation */
         .topbar {
             height: 70px;
@@ -136,6 +140,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            color: inherit;
         }
 
         .profile-img {
@@ -256,7 +262,6 @@
         </ul>
     </div>
 
-    
     <!-- Main Content -->
     <div class="content">
 
@@ -278,10 +283,10 @@
                 <i class="fa-solid fa-circle-question"></i>
                 <i class="fa-solid fa-bell"></i>
 
-                <div class="profile-area">
+                <a href="facultyprofile.html" class="profile-area">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img">
                     <span class="profile-text">Hello! Faculty</span>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -299,6 +304,7 @@
 <script>
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector('.content');
 
     // Mobile behaviour
     if (window.innerWidth <= 768) {
@@ -308,6 +314,7 @@ function toggleSidebar() {
 
     // Desktop behaviour
     sidebar.classList.toggle("collapsed");
+    content.classList.toggle("collapsed");
 }
 </script>
 
