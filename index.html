@@ -291,7 +291,7 @@
 
       if (isAdmin) {
         if (username === credentials.admin.username && password === credentials.admin.password) {
-          window.location.href = 'admindashboard.html';
+          window.location.href = 'frontend/admindashboard.html';
         } else {
           alert('Invalid admin credentials');
         }
@@ -318,11 +318,11 @@
         password === credentials[roleKey].password
       ) {
         if (roleKey === 'vac') {
-          window.location.href = 'vacform.html';
+          window.location.href = 'frontend/vacform.html';
         } else if (roleKey === 'pc') {
-          window.location.href = 'programcordinatorform.html';
+          window.location.href = 'frontend/programcordinatorform.html';
         } else {
-          window.location.href = 'faculty/dashboard.html';
+          window.location.href = 'frontend/faculty/dashboard.html';
         }
       } else {
         alert('Invalid credentials for the selected role');
