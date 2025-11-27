@@ -134,6 +134,23 @@
             color: #103b77;
         }
 
+        .logout-btn {
+            background: transparent;
+            border: 1px solid #103b77;
+            color: #103b77;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #103b77;
+            color: #ffffff;
+        }
+
         .profile-area {
             display: flex;
             align-items: center;
@@ -463,7 +480,10 @@
                     <img src="https://i.pravatar.cc/40?img=1" class="profile-img">
                     <span class="profile-text">Admin</span>
                 </a>
+                <button type="button" class="logout-btn" onclick="logout()">Logout</button>
             </div>
+
+            
         </div>
 
         <!-- Page Content -->
@@ -607,6 +627,28 @@
 
 <script>
 // Removed toggleSidebar function as sidebar is now hidden
+
+function logout() {
+    try {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('userRole');
+    } catch (e) {
+        // ignore storage errors
+    }
+
+    // Use replace so back button won't return to this page
+    window.location.replace('../index.html');
+}
+</script>
+
+<script>
+// Simple auth guard: if not logged in, redirect to login/home
+document.addEventListener('DOMContentLoaded', function () {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        window.location.replace('../index.html');
+    }
+});
 </script>
 
 </body>

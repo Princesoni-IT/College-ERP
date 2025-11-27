@@ -89,6 +89,23 @@
       color: var(--sidebar-bg);
     }
 
+    .logout-btn {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
     .profile-area {
       display: flex;
       align-items: center;
@@ -257,13 +274,12 @@
       </div>
     </div>
     <div class="top-right">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <i class="fa-solid fa-circle-question"></i>
-      <i class="fa-solid fa-bell"></i>
+     
       <div class="profile-area">
         <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img" alt="Profile">
         <span class="profile-text">Hello! Faculty</span>
       </div>
+      <button type="button" class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </header>
 
@@ -458,24 +474,6 @@
         <button type="submit" class="btn">Submit</button>
       </footer>
     </form>
-      <div class="profile-area">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-img" alt="Profile">
-        <span class="profile-text">Hello! Faculty</span>
-      </div>
-      <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
-    </div>
-  </header>
-
-
-  <script>
-    // ... existing script ...
-
-    function logout() {
-      // Add your logout logic here, such as clearing session data or redirecting to the login page
-      alert('Logged out!'); // Replace with actual logout functionality
-      window.location.href = 'login.html'; // Redirect to login page, replace with your actual login page URL
-    }
-  </script>
   </div>
   </div>
 
@@ -541,6 +539,54 @@
       row.remove();
       ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
     }
+
+    function logout() {
+      try {
+        // Clear any stored session-related data
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('userRole');
+      } catch (e) {
+        // ignore storage errors
+      }
+
+      // Redirect to main/login page and prevent going back
+      window.location.replace('../index.html');
+    }
+
+    document.getElementById('programCoordinatorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const email = formData.get('email');
+      const program = formData.get('program');
+      const programCode = formData.get('program_code');
+      const coordinatorName = formData.get('coordinator_name');
+      const session = formData.get('session');
+      
+      // Create VAC submission record
+      const vacSubmission = {
+        email: email,
+        program: program,
+        programCode: programCode,
+        coordinatorName: coordinatorName,
+        session: session,
+        submissionDate: new Date().toISOString(),
+        submissionType: 'VAC Form',
+        status: 'pending'
+      };
+      
+      // Store in localStorage for Program Coordinator dashboard
+      let vacSubmissions = JSON.parse(localStorage.getItem('vacSubmissions') || '[]');
+      vacSubmissions.push(vacSubmission);
+      localStorage.setItem('vacSubmissions', JSON.stringify(vacSubmissions));
+      
+      // Show success message
+      alert('VAC Form submitted successfully! The Program Coordinator will review your submission.');
+      
+      // Reset form
+      this.reset();
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       ['coursesTable', 'focusTable', 'vacTable'].forEach(updateSerials);
