@@ -291,6 +291,12 @@
 
       if (isAdmin) {
         if (username === credentials.admin.username && password === credentials.admin.password) {
+          // Store session info for guards on protected pages
+          try {
+            localStorage.setItem('currentUser', username);
+            localStorage.setItem('userRole', 'admin');
+          } catch (e) {}
+
           window.location.href = 'frontend/admindashboard.html';
         } else {
           alert('Invalid admin credentials');
@@ -317,6 +323,12 @@
         username === credentials[roleKey].username &&
         password === credentials[roleKey].password
       ) {
+        // Store session info for faculty-style roles
+        try {
+          localStorage.setItem('currentUser', username);
+          localStorage.setItem('userRole', roleKey);
+        } catch (e) {}
+
         if (roleKey === 'vac') {
           window.location.href = 'frontend/vacform.html';
         } else if (roleKey === 'pc') {
