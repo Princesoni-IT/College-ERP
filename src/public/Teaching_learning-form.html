@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching, Learning & Pedagogy Innovations</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f4f8;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      height: 70px;
+      background-color: #1e3c72;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      margin-bottom: 20px;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      height: 55px;
+    }
+
+    .text h1 {
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .text p {
+      font-size: 12px;
+      color: #dcdcdc;
+    }
+
+    .profile-container {
+      position: relative;
+    }
+
+    .profile-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: #2a5298;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 55px;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      min-width: 200px;
+      display: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu-item {
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .profile-menu-item:hover {
+      background: #f5f5f5;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.9;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 900px;
+      padding: 30px;
+      margin: 40px auto;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .form-body {
+      padding: 25px 0;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .required {
+      color: red;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #2a5298;
+    }
+
+    .input-group input.error {
+      border: 2px solid red;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .popup {
+      width: 350px;
+      background: #fff;
+      border-radius: 8px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.1);
+      text-align: center;
+      padding: 30px;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 2000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup.open-popup {
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+      width: 70px;
+      margin-bottom: 15px;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #28a745;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+  <nav class="navbar">
+    <div class="left-section">
+      <img src="../images/logo.png" class="logo" />
+      <div class="text">
+        <h1>Prestige Institute of Research & Management</h1>
+        <p>Gwalior</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:15px;align-items:center;">
+      <div class="profile-container">
+        <button class="profile-btn" id="profileBtn"><i class="fa fa-user"></i></button>
+        <div class="profile-menu" id="profileMenu">
+          <a class="profile-menu-item" href="#">Edit Profile</a>
+          <a class="profile-menu-item" href="#">Change Password</a>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Teaching, Learning & Pedagogy Innovations</h2>
+    </div>
+
+    <form id="pedagogyForm" class="form-body">
+      <div class="input-grid">
+
+        <div class="input-group">
+          <label>Innovative Pedagogy Used <span class="required">*</span></label>
+          <input name="pedagogy" />
+        </div>
+
+        <div class="input-group">
+          <label>Course-wise Pedagogy Mapping <span class="required">*</span></label>
+          <input name="mapping" />
+        </div>
+
+        <div class="input-group full-width">
+          <label>Evidence Upload Link <span class="required">*</span></label>
+          <input type="url" name="evidenceLink" />
+        </div>
+
+        <div class="input-group full-width">
+          <label>Program ID (optional)</label>
+          <input name="program_Id" />
+        </div>
+
+      </div>
+
+      <button class="submit-btn">Submit Pedagogy Details</button>
+    </form>
+  </div>
+
+
+  <div class="popup" id="popup">
+    <img src="../images/check.jpg" />
+    <h2>Thank You!</h2>
+    <p>Your form was submitted successfully.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const profileBtn = document.getElementById("profileBtn");
+      const profileMenu = document.getElementById("profileMenu");
+      const form = document.getElementById("pedagogyForm");
+      const popup = document.getElementById("popup");
+
+      profileBtn.onclick = e => {
+        e.stopPropagation();
+        profileMenu.classList.toggle("active");
+      };
+
+      document.addEventListener("click", e => {
+        if (!e.target.closest(".profile-container")) {
+          profileMenu.classList.remove("active");
+        }
+      });
+
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const inputs = form.querySelectorAll("input");
+        let valid = true;
+        const payload = {};
+
+        inputs.forEach(i => {
+          i.classList.remove("error");
+          if (!i.value && i.name !== "program_Id") {
+            valid = false;
+            i.classList.add("error");
+          }
+          payload[i.name] = i.value.trim();
+        });
+
+        if (!valid) {
+          alert("Please fill all required fields");
+          return;
+        }
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("Please login first");
+          return;
+        }
+
+        try {
+          const res = await fetch("/api/teaching/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok) return alert(data.error || "Submit failed");
+
+          popup.classList.add("open-popup");
+          form.reset();
+
+        } catch (err) {
+          alert("Server error");
+        }
+      });
+
+      window.closePopup = () => popup.classList.remove("open-popup");
+    });
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+
+</html>

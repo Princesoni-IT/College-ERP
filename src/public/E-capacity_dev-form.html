@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capacity Development Form</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f2f4f8;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      height: 70px;
+      background-color: #153977;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: white;
+    }
+
+    .logo {
+      height: 55px;
+    }
+
+    .text h1 {
+      font-size: 18px;
+    }
+
+    .text p {
+      font-size: 12px;
+      color: #d0d7e2;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-container {
+      position: relative;
+    }
+
+    .profile-btn {
+      background: #1e5a96;
+      border: none;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 55px;
+      right: 0;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      display: none;
+      min-width: 200px;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu-item {
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    .profile-menu-item:hover {
+      background: #f5f5f5;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.9;
+    }
+
+    .page-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 900px;
+      padding: 40px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+      background: #153977;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .form-body {
+      padding: 30px 0;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .required {
+      color: red;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #153977;
+    }
+
+    .input-group input.error {
+      border: 2px solid red;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: #153977;
+      border-radius: 8px;
+      border: none;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.1);
+      visibility: hidden;
+      background: #ffffff;
+      padding: 30px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      z-index: 2000;
+      transition: 0.4s;
+    }
+
+    .popup.open-popup {
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #28a745;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="left-section">
+      <img src="../images/logo.png" class="logo" />
+      <div class="text">
+        <h1>Prestige Institute of Research & Management</h1>
+        <p>Gwalior</p>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="profile-container">
+        <button class="profile-btn" id="profileBtn">
+          <i class="fas fa-user"></i>
+        </button>
+
+        <div class="profile-menu" id="profileMenu">
+          <!-- <a class="profile-menu-item" href="#">View Profile</a> -->
+          <a class="profile-menu-item" href="#">Edit Profile</a>
+          <a class="profile-menu-item" href="#">Change Password</a>
+        </div>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Capacity Development & Skill Enhancement Activities</h2>
+      </div>
+
+      <form class="form-body" id="activityForm">
+        <div class="input-grid">
+          <div class="input-group full-width">
+            <label>Name of Activity<span class="required">*</span></label>
+            <input type="text" id="activityName" />
+          </div>
+
+          <div class="input-group">
+            <label>Type<span class="required">*</span></label>
+            <input type="text" id="activityType" />
+          </div>
+
+          <div class="input-group">
+            <label>Year<span class="required">*</span></label>
+            <input type="text" id="year" />
+          </div>
+
+          <div class="input-group">
+            <label>Students<span class="required">*</span></label>
+            <input type="text" id="students" />
+          </div>
+
+          <div class="input-group">
+            <label>Resource Person<span class="required">*</span></label>
+            <input type="text" id="resourcePerson" />
+          </div>
+
+          <div class="input-group full-width">
+            <label>Document Link<span class="required">*</span></label>
+            <input type="url" id="documentLink" />
+          </div>
+
+          <div class="input-group full-width">
+            <label>Program ID</label>
+            <input type="text" id="programId" />
+          </div>
+        </div>
+
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <img src="../images/check.jpg">
+    <h2>Thank You!</h2>
+    <p>Form Submitted Successfully</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    profileBtn.onclick = () => profileMenu.classList.toggle("active");
+    document.onclick = (e) => {
+      if (!e.target.closest(".profile-container")) {
+        profileMenu.classList.remove("active");
+      }
+    };
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+    }
+
+    const popup = document.getElementById("popup");
+    const form = document.getElementById("activityForm");
+
+    function openPopup() {
+      popup.classList.add("open-popup");
+    }
+    function closePopup() {
+      popup.classList.remove("open-popup");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        activityName: activityName.value.trim(),
+        activityType: activityType.value.trim(),
+        year: year.value.trim(),
+        students: students.value.trim(),
+        resourcePerson: resourcePerson.value.trim(),
+        documentLink: documentLink.value.trim(),
+        program_Id: programId.value.trim(),
+      };
+
+      if (Object.values(payload).slice(0, 6).includes("")) {
+        alert("Please fill all required fields");
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+      if (!token) return alert("Login required");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/capacity/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error();
+        openPopup();
+        form.reset();
+      } catch {
+        alert("Server Error");
+      }
+    });
+  </script>
+</body>
+
+</html>

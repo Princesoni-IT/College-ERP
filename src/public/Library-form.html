@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library & Learning Resources</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      min-height: 100vh;
+    }
+
+
+    .navbar {
+      height: 70px;
+      background-color: #153977;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      height: 55px;
+    }
+
+    .text h1 {
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .text p {
+      font-size: 12px;
+      color: #d0d7e2;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+
+    .profile-container {
+      position: relative;
+    }
+
+    .profile-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: #1e5a96;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: #fff;
+      min-width: 180px;
+      border-radius: 6px;
+      display: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu-item {
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #333;
+      display: block;
+    }
+
+    .profile-menu-item:hover {
+      background: #f2f2f2;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.9;
+    }
+
+
+    .form-container {
+      width: 90%;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 35px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-header {
+      background: #153977;
+      color: #fff;
+      padding: 18px;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-body {
+      padding: 10px 0;
+    }
+
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .required {
+      color: red;
+    }
+
+    .input-group input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .input-group input:focus {
+      border-color: #153977;
+      outline: none;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #153977;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* ===== POPUP ===== */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 350px;
+      background: #fff;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup.open-popup {
+      visibility: visible;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+      width: 70px;
+      margin-bottom: 15px;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: #28a745;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    @media (max-width: 600px) {
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="left-section">
+      <img src="../images/logo.png" class="logo">
+      <div class="text">
+        <h1>Prestige Institute of Research & Management</h1>
+        <p>Gwalior</p>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="profile-container">
+        <button class="profile-btn" id="profileBtn"><i class="fas fa-user"></i></button>
+        <div class="profile-menu" id="profileMenu">
+          <!-- <a class="profile-menu-item" href="#">View Profile</a> -->
+          <a class="profile-menu-item" href="#">Edit Profile</a>
+          <a class="profile-menu-item" href="#">Change Password</a>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Library & Learning Resources</h2>
+    </div>
+
+    <form class="form-body" id="libraryForm">
+      <div class="input-grid">
+
+        <div class="input-group full-width">
+          <label>Books Recommended <span class="required">*</span></label>
+          <input id="booksRecommended" required>
+        </div>
+
+        <div class="input-group">
+          <label>No. of New Books Added *</label>
+          <input type="number" id="newBooksAdded" required>
+        </div>
+
+        <div class="input-group">
+          <label>e-Resources *</label>
+          <input id="eResources" required>
+        </div>
+
+        <div class="input-group full-width">
+          <label>Recommendation Document Link *</label>
+          <input type="url" id="recommendationLink" required>
+        </div>
+
+        <div class="input-group full-width">
+          <label>Program ID</label>
+          <input id="programId">
+        </div>
+
+      </div>
+
+      <button class="submit-btn" type="submit">Submit Library Details</button>
+    </form>
+  </div>
+
+  <div class="popup" id="popup">
+    <img src="../images/check.jpg">
+    <h2>Thank You!</h2>
+    <p>Your form was submitted successfully.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    profileBtn.onclick = e => {
+      e.stopPropagation();
+      profileMenu.classList.toggle("active");
+    };
+    document.onclick = () => profileMenu.classList.remove("active");
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+
+    const popup = document.getElementById("popup");
+    const form = document.getElementById("libraryForm");
+
+    function openPopup() { popup.classList.add("open-popup"); }
+    function closePopup() { popup.classList.remove("open-popup"); }
+
+    function qs(name) {
+      return new URLSearchParams(window.location.search).get(name) || "";
+    }
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const payload = {
+        booksRecommended: booksRecommended.value,
+        newBooksAdded: +newBooksAdded.value,
+        eResources: eResources.value,
+        recommendationLink: recommendationLink.value,
+        program_Id: programId.value || qs("programId")
+      };
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login first");
+        return;
+      }
+
+      const res = await fetch("/api/library/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        openPopup();
+        form.reset();
+      } else {
+        alert("Submission failed");
+      }
+    });
+  </script>
+
+</body>
+
+</html>

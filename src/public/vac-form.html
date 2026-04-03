@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAC Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .form-container {
+      padding: 30px;
+    }
+
+    .section-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+    }
+
+    .section-table th,
+    .section-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e1e5e9;
+    }
+
+    .section-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1 1 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin: 12px 0 6px;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #2a5298;
+    }
+
+    .form-group input.error {
+      border-color: #e74c3c;
+      background: #fdf2f2;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .course-section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e1e5e9;
+    }
+
+    .course-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .submit-btn,
+    .view-btn {
+      flex: 1;
+      min-width: 150px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .view-btn {
+      background: #fd7e14;
+      color: white;
+    }
+
+    .view-btn:hover {
+      opacity: 0.9;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Popup */
+
+    .popup {
+      width: 350px;
+      background: #fff;
+      border-radius: 10px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.1);
+      text-align: center;
+      padding: 30px;
+      visibility: hidden;
+      transition: 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+
+    .open-popup {
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup h2 {
+      color: #2a5298;
+      margin-bottom: 10px;
+    }
+
+    .popup button {
+      background: #2a5298;
+      border-radius: 20px;
+      width: auto;
+      padding: 8px 25px;
+      margin-top: 20px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        flex-direction: column;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>VAC Submit Form</h1>
+    </div>
+
+    <div class="form-container">
+
+      <div id="coursesContainer">
+        <div class="course-section" data-course-id="1">
+          <div class="course-title">Details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="courseName1">Course Name *</label>
+              <input type="text" id="courseName1" placeholder="e.g., Web Development" required>
+              <div class="error-message" id="courseNameError1">Course name is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="courseCode1">VAC Course Code *</label>
+              <input type="text" id="courseCode1" placeholder="e.g., VAC001" required>
+              <div class="error-message" id="courseCodeError1">Course code is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="programId1">Program ID (optional)</label>
+              <input type="text" id="programId1" placeholder="Program ID or UUID" />
+            </div>
+
+            <div class="form-group">
+              <label for="duration1">Duration (Hours) *</label>
+              <input type="number" id="duration1" min="1" placeholder="e.g., 30" required>
+              <div class="error-message" id="durationError1">Duration must be at least 1 hour</div>
+            </div>
+
+            <div class="form-group">
+              <label for="timesOffered1">No. of Times Offered *</label>
+              <input type="number" id="timesOffered1" min="1" placeholder="e.g., 2" required>
+              <div class="error-message" id="timesError1">Must be offered at least once</div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentsEnrolled1">Students Enrolled</label>
+              <input type="text" id="studentsEnrolled1" placeholder="e.g., 45 or John, Jane...">
+            </div>
+
+            <div class="form-group">
+              <label for="studentsCompleted1">Students Completed</label>
+              <input type="text" id="studentsCompleted1" placeholder="e.g., 42 or list...">
+            </div>
+
+            <div class="form-group">
+              <label for="brochureLink1">Brochure/Certificate Link</label>
+              <input type="url" id="brochureLink1" placeholder="https://example.com/brochure.pdf">
+            </div>
+
+            <div class="form-group">
+              <label for="coordinator1">VAC Coordinator Name *</label>
+              <input type="text" id="coordinator1" placeholder="e.g., Dr. John Doe" required>
+              <div class="error-message" id="coordinatorError1">Coordinator name is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="coordinator1">Upload Brochure / Certificate (PDF, JPG, PNG, CSV)</label>
+              <input type="file" id="certificateUpload" name="certificateUpload" accept=".pdf,.jpg,.jpeg,.png, .csv"
+                required />
+              <div class="error-message" id="certificateUpload">Upload Documents Here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="submitVacBtn" class="submit-btn"> Send Data</button>
+
+        <div class="popup" id="popup">
+          <img src="../images/check.jpg" alt="Check Mark">
+          <h2>Thank You!</h2>
+          <p>Your Form Successfully Submitted. Thanks!</p>
+          <button type="button" onclick="closePopup()">OK</button>
+        </div>
+      </div>
+
+      <script>
+
+
+        // popup section
+        let popup = document.getElementById("popup");
+        function openPopup() {
+          popup.classList.add("open-popup");
+        }
+        function closePopup() {
+          popup.classList.remove("open-popup");
+        }
+
+        (function () {
+          const submitBtn = document.getElementById("submitVacBtn");
+
+          async function submitVac() {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            const courseName = document.getElementById("courseName1").value.trim();
+            const courseCode = document.getElementById("courseCode1").value.trim();
+            const duration = document.getElementById("duration1").value;
+            const timesOffered = document.getElementById("timesOffered1").value;
+            const studentsEnrolled = document.getElementById("studentsEnrolled1").value.trim();
+            const studentsCompleted = document.getElementById("studentsCompleted1").value.trim();
+            const brochureInput = document.getElementById("certificateUpload");
+            const coordinator = document.getElementById("coordinator1").value.trim();
+
+            if (!courseName || !courseCode || !duration || !timesOffered || !coordinator) {
+              alert("Please fill required fields: Course Name, Course Code, Duration, Times Offered, Coordinator");
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Data";
+              return;
+            }
+
+            let brochureLink = "";
+            if (brochureInput && brochureInput.files && brochureInput.files.length) {
+              const f = brochureInput.files[0];
+              const name = f.name || '';
+              const ext = name.split('.').pop().toLowerCase();
+              const allowedExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'csv'];
+
+              if (!allowedExtensions.includes(ext)) {
+                alert('Only PDF, JPG, PNG and CSV files are allowed.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Data';
+                return;
+              }
+
+              // if (ext === 'csv') {
+              //   alert('CSV files are not accepted. Please upload PDF, JPG or PNG files only.');
+              //   submitBtn.disabled = false;
+              //   submitBtn.textContent = '📩 Send To Program-Coordinator ';
+              //   return;
+              // }
+              brochureLink = name;
+            }
+
+            const payload = {
+              program_Id: (document.getElementById('programId1') && document.getElementById('programId1').value) ? document.getElementById('programId1').value.trim() : "",
+              courses: [
+                {
+                  courseName,
+                  courseCode,
+                  duration: Number(duration) || 0,
+                  timesOffered: Number(timesOffered) || 0,
+                  studentsEnrolled,
+                  studentsCompleted,
+                  brochureLink,
+                  coordinator,
+                },
+              ],
+            };
+
+            const token = (() => {
+              try {
+                return localStorage.getItem("token");
+              } catch (e) {
+                return null;
+              }
+            })();
+
+            if (!token) {
+              alert("You must be logged in to submit a VAC entry. Please login first.");
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Data";
+              return;
+            }
+
+            try {
+              // Send JSON payload to VAC entries endpoint (saves to DB)
+              const response = await fetch('/api/vac/entries', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+              });
+
+              const result = await response.json();
+              if (!response.ok) {
+                const msg = result && result.error ? result.error : 'Failed to submit VAC entry';
+                throw new Error(msg);
+              }
+
+              openPopup();
+              // Optionally redirect after short delay
+              setTimeout(() => {
+                // refresh or go to dashboard
+                // window.location.href = '/pcdashboard.html';
+              }, 1200);
+            } catch (err) {
+              console.error('Submit error', err);
+              alert('Error submitting VAC entry: ' + (err.message || err));
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Data';
+            }
+          }
+
+          submitBtn.addEventListener("click", submitVac);
+        })();
+      </script>
+</body>
+
+</html>
