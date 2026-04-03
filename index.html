@@ -10,7 +10,7 @@
       width: 100%;
       margin: 0;
       padding: 0;
-      /* background-image: url(./image.png); */
+      background-image: url('../images/image.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -22,14 +22,14 @@
       font-family: "Poppins", sans-serif;
     }
 
-    .container {
-      background-color: #b3dcfc;
-      padding: 40px 35px;
-      border-radius: 15px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      width: 340px;
-      text-align: center;
-    }
+   .container {
+  background-color: rgba(179, 220, 252, 0.5);
+  padding: 40px 35px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 340px;
+  text-align: center;
+}
 
     .container img {
       width: 120px;
@@ -178,15 +178,15 @@
     .login-btn:hover {
       background-color: #142161;
     }
-
-    
   </style>
 </head>
 
 <body>
 
+
+
   <div class="container">
-    <img src="frontend/logo.png" alt="logo" height="50%" width="50%">
+    <img src="../images/pimrlogo.png" alt="logo" height="50%" width="50%">
     <h2>Login</h2>
 
     <!-- Toggle Buttons -->
@@ -209,17 +209,24 @@
 
     <!-- Custom Dropdown -->
     <div class="input-box" id="roleBox">
-        
+
       <div class="custom-select" id="customSelect">
         <i>⚙</i>
         <div class="selected" style="text-align:left;">Role</div>
         <ul class="options" style="text-align:left;">
-          <li data-value="Faculty"style="text-align:left;">Faculty</li>
-          <li data-value="Program VAC"style="text-align:left;">Program VAC</li>
-          <li data-value="Program Coordinator"style="text-align:left;">Program Coordinator</li>
-          <li data-value="Component Coordinator"style="text-align:left;">Component Coordinator</li>
-          <li data-value="Timetable Coordinator"style="text-align:left;">Timetable Coordinator</li>
+          <li data-value="faculty" style="text-align:left;">faculty</li>
+          <li data-value="vac" style="text-align:left;">vac</li>
+          <li data-value="pc" style="text-align:left;">pc</li>
+          <!-- <li data-value="component" style="text-align:left;">Component Coordinator</li>
+          <li data-value="timetable" style="text-align:left;">Timetable Coordinator</li> -->
+          <li data-value="E-content" style="text-align:left;">E-content</li>
+          <li data-value="E-capacity" style="text-align:left;">E-capacity</li>
+          <li data-value="Teaching-learning" style="text-align:left;">Teaching-learning</li>
+          <li data-value="Expreiential" style="text-align:left;">Experiential-coordinator</li>
+          <li data-value="Learner_support" style="text-align:left;">Learner-support-coordinator</li>
+          <li data-value="Library" style="text-align:left;">Library-coordinator-coordinator</li>
         </ul>
+
       </div>
     </div>
 
@@ -237,11 +244,11 @@
     const options = optionList.querySelectorAll("li");
 
     const credentials = {
-      admin: { username: 'admin123', password: 'admin123' },
-      faculty: { username: 'faculty123', password: 'faculty123' },
-      vac: { username: 'vac123', password: 'vac123' },
-      pc: { username: 'pc123', password: 'pc123' }
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value,
+      role: document.getElementById("roleBox").value // faculty, pc, vac, admin
     };
+
 
     // Hide role box for admin
     roleBox.style.display = 'none';
@@ -278,68 +285,67 @@
       }
     });
 
-    function login() {
+    async function login() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       const isAdmin = adminBtn.classList.contains('active');
-      const selectedRole = selected.getAttribute('data-value');
+      const selectedRole = selected.dataset.value; // use dataset.value
+
+      const role = isAdmin ? "admin" : selectedRole;
 
       if (!username || !password) {
-        alert("Please fill all the fields!");
+        alert("Please fill all fields!");
         return;
       }
 
-      if (isAdmin) {
-        if (username === credentials.admin.username && password === credentials.admin.password) {
-          // Store session info for guards on protected pages
-          try {
-            localStorage.setItem('currentUser', username);
-            localStorage.setItem('userRole', 'admin');
-          } catch (e) {}
+      if (!role) {
+        alert("Please select a role");
+        return;
+      }
 
-          window.location.href = 'frontend/admindashboard.html';
-        } else {
-          alert('Invalid admin credentials');
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password, role })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.error || "Login failed!");
+          return;
         }
-        return;
-      }
 
-      if (!selectedRole || selectedRole === 'Role') {
-        alert('Please select a role');
-        return;
-      }
-
-      const roleKey =
-        selectedRole === 'Faculty' ? 'faculty' :
-        selectedRole === 'Program VAC' ? 'vac' :
-        selectedRole === 'Program Coordinator' ? 'pc' : null;
-
-      if (!roleKey) {
-        alert('This role is not yet configured.');
-        return;
-      }
-
-      if (
-        username === credentials[roleKey].username &&
-        password === credentials[roleKey].password
-      ) {
-        // Store session info for faculty-style roles
-        try {
-          localStorage.setItem('currentUser', username);
-          localStorage.setItem('userRole', roleKey);
-        } catch (e) {}
-
-        if (roleKey === 'vac') {
-          window.location.href = 'frontend/vacform.html';
-        } else if (roleKey === 'pc') {
-          window.location.href = 'frontend/programcordinatorform.html';
-        } else {
-          window.location.href = 'frontend/faculty/dashboard.html';
+        // store token and role for authenticated requests
+        if (data.token && data.user) {
+          try { 
+            localStorage.setItem('token', data.token); 
+            localStorage.setItem('userRole', data.user.role || ''); 
+            localStorage.setItem('username', data.user.username || ''); 
+          } catch (e) { /* ignore */ }
         }
-      } else {
-        alert('Invalid credentials for the selected role');
+
+        const userRole = data.user?.role;
+        if (userRole === "admin") window.location.href = "admindashboard.html";
+        else if (userRole === "pc") window.location.href = "PC-form.html";
+        else if (userRole === "vac") window.location.href = "VAC-Link.html";
+        else if (userRole === "faculty") window.location.href = "faculty.html";
+        else if (userRole === "E-content") window.location.href = "E-content-form.html";
+        else if (userRole === "E-capacity") window.location.href = "E-capacity_dev-form.html";
+        else if (userRole === "Teaching-learning") window.location.href = "Teaching_learning-form.html";
+        else if (userRole === "Expreiential") window.location.href = "Experiential-form.html";
+        else if (userRole === "Learner_support") window.location.href = "Learner_support-form.html";
+        else if (userRole === "Library") window.location.href = "Library-form.html";
+        else alert("Unknown role returned");
+
+      } catch (err) {
+        console.error(err);
+        alert("Server error. Is your Node.js backend running?");
       }
     }
+
+
   </script>
 
 </body>
